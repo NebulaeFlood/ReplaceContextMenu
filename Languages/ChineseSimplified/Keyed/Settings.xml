@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<!-- EN: Replace Context Menu -->
+	<NCCM.SettingsCategory.Label>替换右键菜单</NCCM.SettingsCategory.Label>
+
+	<!-- EN: Number to trigger the replacement: -->
+	<NCCM.Settings.MinimumOptionCountCauseReplacement.Label>触发替换的最少选项数：</NCCM.Settings.MinimumOptionCountCauseReplacement.Label>
+	<!-- EN: When the number of options in the menu is greater than this number, we will replace the vanilla menu. -->
+	<NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>当菜单中选项多于此数时，替换原版菜单。</NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>
+
+	<!-- EN: Whether to use vanilla render mode -->
+	<NCCM.Settings.UseVanillaRenderMode.Label>是否使用原版渲染方式</NCCM.Settings.UseVanillaRenderMode.Label>
+	<!-- EN: When facing error caused by this mod, turn this on to improve compatibility. -->
+	<NCCM.Settings.UseVanillaRenderMode.Tooltip>当遇到报错时，打开此项以提高兼容性。</NCCM.Settings.UseVanillaRenderMode.Tooltip>
+
+</LanguageData>

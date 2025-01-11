@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<NCCM.SettingsCategory.Label>Replace Context Menu</NCCM.SettingsCategory.Label>
+
+	<NCCM.Settings.MinimumOptionCountCauseReplacement.Label>Number to trigger the replacement:</NCCM.Settings.MinimumOptionCountCauseReplacement.Label>
+	<NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>When the number of options in the menu is greater than this number, we will replace the vanilla menu.</NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>
+
+	<NCCM.Settings.UseVanillaRenderMode.Label>Whether to use vanilla render mode</NCCM.Settings.UseVanillaRenderMode.Label>
+	<NCCM.Settings.UseVanillaRenderMode.Tooltip>When facing error caused by this mod, turn this on to improve compatibility.</NCCM.Settings.UseVanillaRenderMode.Tooltip>
+
+</LanguageData>
