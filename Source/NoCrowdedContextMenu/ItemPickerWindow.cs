@@ -4,6 +4,7 @@ using Nebulae.RimWorld.UI.Controls.Panels;
 using Nebulae.RimWorld.UI.Data;
 using Nebulae.RimWorld.UI.Data.Binding;
 using Nebulae.RimWorld.UI.Windows;
+using Nebulae.RimWorld.Utilities;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,14 @@ namespace NoCrowdedContextMenu
 {
     public partial class ItemPickerWindow : ControlWindow
     {
+        //------------------------------------------------------
+        //
+        //  Public Const
+        //
+        //------------------------------------------------------
+
+        #region Public Const
+
         public const float OptionAreaMargin = 8f;
         public const float OptionItemHeight = 44f;
         public const float OptionItemWidth = 240f;
@@ -23,51 +32,109 @@ namespace NoCrowdedContextMenu
         public const float SearchBarWidth = 280f;
         public const float StandardItemMargin = 4f;
 
+        #endregion
 
-        // private static Texture2D SwitchMenuIcon = ContentFinder<Texture2D>.Get("UI/Icons/SwitchFaction");
 
+        private static Rect _previousWindowRect = Rect.zero;
 
         private QuickSearchFilter _filter;
         private Binding _searchTextBinding;
         private TextBox _searchTextBox;
         private Panel _slectionArea;
 
+        public override Vector2 InitialSize
+        {
+            get
+            {
+                return NCCM.Settings.HasMemory && _previousWindowRect != Rect.zero
+                    ? new Size(_previousWindowRect.width, _previousWindowRect.height)
+                    : new Size(900f, 700f);
+            }
+        }
 
-        public ItemPickerWindow(FloatMenu menu, List<FloatMenuOption> options)
+
+        public ItemPickerWindow()
         {
             absorbInputAroundWindow = true;
             closeOnClickedOutside = true;
             doCloseButton = false;
+            drawInScreenshotMode = false;
             layer = WindowLayer.Super;
             preventCameraMotion = false;
             soundAppear = SoundDefOf.FloatMenu_Open;
 
             _filter = new QuickSearchFilter();
-
-            Content = new Grid()
-                .SetSize(new float[] { 1f }, new float[] { SearchBarHeight, Grid.Remain })
-                .Set(new Control[]
-                {
-                    CreateSearchBar(this),
-                    CreateSelectionArea(this, menu, options)
-                });
-
-            TextBox.TextProperty.GetMetadata(typeof(TextBox))
-                .PropertyChanged += ForceFilter;
         }
 
+
+        //------------------------------------------------------
+        //
+        //  Public Methods
+        //
+        //------------------------------------------------------
+
+        #region Public Methods
 
         public override void PostClose()
         {
             base.PostClose();
+
+            if (NCCM.Settings.HasMemory)
+            {
+                _previousWindowRect = windowRect;
+            }
+            else
+            {
+                _previousWindowRect = Rect.zero;
+            }
+
             _searchTextBinding.Unbind();
+            
+            Content = null;
         }
 
         public override void PostOpen()
         {
             base.PostOpen();
-            _searchTextBox.GetFocus(this);
+            
+            if (NCCM.Settings.FocusSearchBar)
+            {
+                _searchTextBox.GetFocus();
+            }
         }
+
+        public override void PreOpen()
+        {
+            base.PreOpen();
+
+            if (NCCM.Settings.HasMemory
+                && _previousWindowRect != Rect.zero)
+            {
+                windowRect = _previousWindowRect;
+            }
+        }
+
+        public void SetOptions(FloatMenu menu, List<FloatMenuOption> options)
+        {
+            Content = new Grid()
+                .SetSize(new float[] { 1f }, new float[] { SearchBarHeight, Grid.Remain })
+                .Set(new Control[]
+                {
+                                CreateSearchBar(this),
+                                CreateSelectionArea(this, menu, options)
+                });
+
+            TextBox.TextProperty.GetMetadata(typeof(TextBox))
+                .PropertyChanged += ForceFilter;
+
+            _filter.Text = string.Empty;
+
+            draggable = NCCM.Settings.IsDragable;
+            resizeable = NCCM.Settings.IsResizable;
+            forcePause = NCCM.Settings.PauseGame;
+        }
+
+        #endregion
 
 
         private bool FilterOption(Control control)
@@ -80,6 +147,14 @@ namespace NoCrowdedContextMenu
             _slectionArea.InvalidateFilter();
         }
 
+
+        //------------------------------------------------------
+        //
+        //  Control Creater
+        //
+        //------------------------------------------------------
+
+        #region Control Creater
 
         private static StackPanel CreateSearchBar(ItemPickerWindow window)
         {
@@ -125,7 +200,7 @@ namespace NoCrowdedContextMenu
         {
             MenuItem[] menuItems = new MenuItem[options.Count];
 
-            if (NCCM.Settings.useVanillaRenderMode)
+            if (NCCM.Settings.UseVanillaRenderMode)
             {
                 for (int i = 0; i < menuItems.Length; i++)
                 {
@@ -164,5 +239,7 @@ namespace NoCrowdedContextMenu
                 VerticalScrollBarVisibility = ScrollBarVisibility.Hidden
             };
         }
+
+        #endregion
     }
 }

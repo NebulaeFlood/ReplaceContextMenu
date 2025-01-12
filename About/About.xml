@@ -16,11 +16,6 @@
         		<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
         		<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
     		</li>
-			<li>
-        		<packageId>nebulae.rimWorld</packageId>
-        		<displayName>NebulaeFlood's Lib</displayName>
-        		<steamWorkshopUrl>steam://url/CommunityFilePage/3402415902</steamWorkshopUrl>
-			</li>
 		</v1.5>
     </modDependenciesByVersion>
 	<loadAfter>

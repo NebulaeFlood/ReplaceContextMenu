@@ -3,10 +3,25 @@
 
 	<NCCM.SettingsCategory.Label>Replace Context Menu</NCCM.SettingsCategory.Label>
 
+	<NCCM.Settings.FocusSearchBar.Label>Auto focus search bar</NCCM.Settings.FocusSearchBar.Label>
+	<NCCM.Settings.FocusSearchBar.Tooltip>After enabling this option, the focus will be automatically set to the search bar when the menu is opened.</NCCM.Settings.FocusSearchBar.Tooltip>
+
+	<NCCM.Settings.HasMemory.Label>Menu has memory</NCCM.Settings.HasMemory.Label>
+	<NCCM.Settings.HasMemory.Tooltip>After enabling this option, the menu will remember its position and size when the window is closed.</NCCM.Settings.HasMemory.Tooltip>
+
+	<NCCM.Settings.IsDragable.Label>Menu is draggable</NCCM.Settings.IsDragable.Label>
+	<NCCM.Settings.IsDragable.Tooltip>After enabling this option, the menu can be dragged.</NCCM.Settings.IsDragable.Tooltip>
+
+	<NCCM.Settings.IsResizable.Label>Menu is resizable</NCCM.Settings.IsResizable.Label>
+	<NCCM.Settings.IsResizable.Tooltip>After enabling this option, a corner will be displayed at the bottom right of the menu for resizing.</NCCM.Settings.IsResizable.Tooltip>
+
 	<NCCM.Settings.MinimumOptionCountCauseReplacement.Label>Number to trigger the replacement:</NCCM.Settings.MinimumOptionCountCauseReplacement.Label>
 	<NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>When the number of options in the menu is greater than this number, we will replace the vanilla menu.</NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>
 
+	<NCCM.Settings.PauseGame.Label>Menu pause game</NCCM.Settings.PauseGame.Label>
+	<NCCM.Settings.PauseGame.Tooltip>After enabling this option, the game will be paused when the menu is opened.</NCCM.Settings.PauseGame.Tooltip>
+
 	<NCCM.Settings.UseVanillaRenderMode.Label>Whether to use vanilla render mode</NCCM.Settings.UseVanillaRenderMode.Label>
-	<NCCM.Settings.UseVanillaRenderMode.Tooltip>When facing error caused by this mod, turn this on to improve compatibility.</NCCM.Settings.UseVanillaRenderMode.Tooltip>
+	<NCCM.Settings.UseVanillaRenderMode.Tooltip>Enable this option to improve compatibility when encountering errors caused by this mod.</NCCM.Settings.UseVanillaRenderMode.Tooltip>
 
 </LanguageData>

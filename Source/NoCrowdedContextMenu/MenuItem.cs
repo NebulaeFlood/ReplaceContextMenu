@@ -34,7 +34,6 @@ namespace NoCrowdedContextMenu
             }
         }
 
-
         protected void OnSelected()
         {
             OriginMenu.PreOptionChosen(Option);
