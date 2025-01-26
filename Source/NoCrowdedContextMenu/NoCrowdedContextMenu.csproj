@@ -38,13 +38,18 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NCCMPatch.cs" />
+    <Compile Include="NCCMSettings.cs" />
+    <Compile Include="SettingPages\AdvancedSettingPage.cs" />
+    <Compile Include="FloatMenuKey.cs" />
     <Compile Include="ItemPickerWindow.cs" />
-    <Compile Include="CustomMenuItem.cs" />
-    <Compile Include="MenuItem.cs" />
-    <Compile Include="MenuOptionUtility.cs" />
+    <Compile Include="CustomControls\CustomMenuItem.cs" />
+    <Compile Include="FieldAccessUtility.cs" />
     <Compile Include="NCCM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VanillaMenuItem.cs" />
+    <Compile Include="CustomControls\ReplaceRecordEntry.cs" />
+    <Compile Include="CustomControls\VanillaMenuItem.cs" />
+    <Compile Include="SettingPages\SettingPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Rimworld.Ref">
@@ -54,10 +59,10 @@
       <Version>2.3.3</Version>
     </PackageReference>
     <PackageReference Include="Nebulae.RimWorld">
-      <Version>1.0.6</Version>
+      <Version>1.0.14</Version>
     </PackageReference>
     <PackageReference Include="Nebulae.RimWorld.UI">
-      <Version>1.2.0</Version>
+      <Version>1.3.4</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

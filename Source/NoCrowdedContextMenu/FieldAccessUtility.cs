@@ -7,7 +7,7 @@ using Verse;
 
 namespace NoCrowdedContextMenu
 {
-    internal static class MenuOptionUtility
+    internal static class FieldAccessUtility
     {
         internal static readonly Func<FloatMenu, List<FloatMenuOption>> OptionsGetter;
 
@@ -17,7 +17,7 @@ namespace NoCrowdedContextMenu
         internal static readonly Func<FloatMenuOption, ThingDef> ShownItemGetter;
         internal static readonly Func<FloatMenuOption, ThingStyleDef> ThingStyleGetter;
 
-        static MenuOptionUtility()
+        static FieldAccessUtility()
         {
             OptionsGetter = CreateFieldGetter<Func<FloatMenu, List<FloatMenuOption>>>(
                 typeof(FloatMenu),
@@ -47,7 +47,7 @@ namespace NoCrowdedContextMenu
         }
 
 
-        private static T CreateFieldGetter<T>(Type type, string name)
+        public static T CreateFieldGetter<T>(Type type, string name)
         {
             ParameterExpression targetExp = Expression.Parameter(type, "target");
             MemberExpression fieldExp = Expression.Field(

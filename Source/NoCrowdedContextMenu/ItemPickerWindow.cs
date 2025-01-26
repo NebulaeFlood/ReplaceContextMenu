@@ -1,4 +1,5 @@
-﻿using Nebulae.RimWorld.UI;
+﻿using NoCrowdedContextMenu.CustomControls;
+using Nebulae.RimWorld.UI;
 using Nebulae.RimWorld.UI.Controls;
 using Nebulae.RimWorld.UI.Controls.Panels;
 using Nebulae.RimWorld.UI.Data;
@@ -15,7 +16,8 @@ using Grid = Nebulae.RimWorld.UI.Controls.Panels.Grid;
 
 namespace NoCrowdedContextMenu
 {
-    public partial class ItemPickerWindow : ControlWindow
+    [StaticConstructorOnStartup]
+    internal class ItemPickerWindow : ControlWindow
     {
         //------------------------------------------------------
         //
@@ -26,29 +28,46 @@ namespace NoCrowdedContextMenu
         #region Public Const
 
         public const float OptionAreaMargin = 8f;
-        public const float OptionItemHeight = 44f;
-        public const float OptionItemWidth = 240f;
-        public const float SearchBarHeight = 38f;
-        public const float SearchBarWidth = 280f;
+        public const float OptionItemHeight = 48f;
+        public const float OptionItemWidth = 300f;
+        public const float SearchBarHeight = 36f;
+        public const float SearchBarWidth = 340f;
         public const float StandardItemMargin = 4f;
 
         #endregion
 
 
-        private static Rect _previousWindowRect = Rect.zero;
+        //------------------------------------------------------
+        //
+        //  Private Fields
+        //
+        //------------------------------------------------------
 
-        private QuickSearchFilter _filter;
-        private Binding _searchTextBinding;
+        #region Private Fields
+
+        private static readonly Texture2D SwitchMenuIcon = ContentFinder<Texture2D>.Get("UI/Buttons/MainButtons/Menu");
+
+        private static Rect _previousWindowRect;
+
+        private readonly QuickSearchFilter _filter;
         private TextBox _searchTextBox;
-        private Panel _slectionArea;
+        private VirtualizingWrapPanel _slectionArea;
 
-        public override Vector2 InitialSize
+        #endregion
+
+
+        public string SearchBarText
         {
-            get
+            get => _filter.Text;
+            set
             {
-                return NCCM.Settings.HasMemory && _previousWindowRect != Rect.zero
-                    ? new Size(_previousWindowRect.width, _previousWindowRect.height)
-                    : new Size(900f, 700f);
+                _filter.Text = value;
+
+                if (IsOpen)
+                {
+                    _searchTextBox.Text = value;
+                    _slectionArea.InvalidateFilter();
+                }
             }
         }
 
@@ -59,11 +78,17 @@ namespace NoCrowdedContextMenu
             closeOnClickedOutside = true;
             doCloseButton = false;
             drawInScreenshotMode = false;
-            layer = WindowLayer.Super;
             preventCameraMotion = false;
             soundAppear = SoundDefOf.FloatMenu_Open;
 
             _filter = new QuickSearchFilter();
+
+            Content = new Grid()
+                .SetSize(new float[] { 1f }, new float[] { SearchBarHeight, Grid.Remain })
+                .Set(
+                    CreateSearchBar(),
+                    CreateSelectionArea()
+                );
         }
 
 
@@ -77,8 +102,6 @@ namespace NoCrowdedContextMenu
 
         public override void PostClose()
         {
-            base.PostClose();
-
             if (NCCM.Settings.HasMemory)
             {
                 _previousWindowRect = windowRect;
@@ -88,50 +111,71 @@ namespace NoCrowdedContextMenu
                 _previousWindowRect = Rect.zero;
             }
 
-            _searchTextBinding.Unbind();
-            
-            Content = null;
-        }
+            SearchBarText = string.Empty;
 
-        public override void PostOpen()
-        {
-            base.PostOpen();
-            
-            if (NCCM.Settings.FocusSearchBar)
-            {
-                _searchTextBox.GetFocus();
-            }
+            BindingManager.Unbind(this);
+            base.PostClose();
         }
 
         public override void PreOpen()
         {
             base.PreOpen();
 
-            if (NCCM.Settings.HasMemory
-                && _previousWindowRect != Rect.zero)
+            if (NCCM.Settings.FocusSearchBar)
             {
-                windowRect = _previousWindowRect;
+                _searchTextBox.GetFocus();
             }
         }
 
         public void SetOptions(FloatMenu menu, List<FloatMenuOption> options)
         {
-            Content = new Grid()
-                .SetSize(new float[] { 1f }, new float[] { SearchBarHeight, Grid.Remain })
-                .Set(new Control[]
+            Control[] menuItems = new Control[options.Count];
+
+            if (NCCM.Settings.UseVanillaRenderMode)
+            {
+                layer = WindowLayer.Super;
+
+                for (int i = 0; i < menuItems.Length; i++)
                 {
-                                CreateSearchBar(this),
-                                CreateSelectionArea(this, menu, options)
-                });
+                    options[i].SetSizeMode(FloatMenuSizeMode.Normal);
+                    menuItems[i] = new VanillaMenuItem(this, menu, options[i])
+                    {
+                        Margin = StandardItemMargin
+                    };
+                }
+            }
+            else
+            {
+                layer = WindowLayer.Dialog;
 
-            TextBox.TextProperty.GetMetadata(typeof(TextBox))
-                .PropertyChanged += ForceFilter;
+                for (int i = 0; i < menuItems.Length; i++)
+                {
+                    options[i].SetSizeMode(FloatMenuSizeMode.Normal);
+                    menuItems[i] = new CustomMenuItem(this, menu, options[i])
+                    {
+                        Margin = StandardItemMargin
+                    };
+                }
+            }
 
-            _filter.Text = string.Empty;
+            _slectionArea.Set(menuItems);
 
             draggable = NCCM.Settings.IsDragable;
             resizeable = NCCM.Settings.IsResizable;
             forcePause = NCCM.Settings.PauseGame;
+        }
+
+        protected override void SetInitialSizeAndPosition()
+        {
+            if (NCCM.Settings.HasMemory
+                && _previousWindowRect != Rect.zero)
+            {
+                windowRect = _previousWindowRect;
+            }
+            else
+            {
+                base.SetInitialSizeAndPosition();
+            }
         }
 
         #endregion
@@ -140,11 +184,6 @@ namespace NoCrowdedContextMenu
         private bool FilterOption(Control control)
         {
             return !_filter.Active || _filter.Matches(control.Name);
-        }
-
-        private void ForceFilter(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            _slectionArea.InvalidateFilter();
         }
 
 
@@ -156,7 +195,7 @@ namespace NoCrowdedContextMenu
 
         #region Control Creater
 
-        private static StackPanel CreateSearchBar(ItemPickerWindow window)
+        private StackPanel CreateSearchBar()
         {
             TextBox textBox = new TextBox
             {
@@ -168,13 +207,13 @@ namespace NoCrowdedContextMenu
                 WrapText = false
             };
 
-            window._searchTextBox = textBox;
+            _searchTextBox = textBox;
 
-            window._searchTextBinding = BindingManager.Bind(
+            BindingManager.Bind(
                 textBox,
                 TextBox.TextProperty,
-                window._filter,
-                nameof(QuickSearchFilter.Text),
+                this,
+                nameof(SearchBarText),
                 BindingMode.OneWay,
                 BindingFlags.Instance | BindingFlags.Public);
 
@@ -193,47 +232,19 @@ namespace NoCrowdedContextMenu
                 textBox);
         }
 
-        private static ScrollViewer CreateSelectionArea(
-            ItemPickerWindow window,
-            FloatMenu menu,
-            List<FloatMenuOption> options)
+        private ScrollViewer CreateSelectionArea()
         {
-            MenuItem[] menuItems = new MenuItem[options.Count];
-
-            if (NCCM.Settings.UseVanillaRenderMode)
+            _slectionArea = new VirtualizingWrapPanel
             {
-                for (int i = 0; i < menuItems.Length; i++)
-                {
-                    options[i].SetSizeMode(FloatMenuSizeMode.Normal);
-                    menuItems[i] = new VanillaMenuItem(window, menu, options[i])
-                    {
-                        Margin = StandardItemMargin
-                    };
-                }
-            }
-            else
-            {
-                for (int i = 0; i < menuItems.Length; i++)
-                {
-                    options[i].SetSizeMode(FloatMenuSizeMode.Normal);
-                    menuItems[i] = new CustomMenuItem(window, menu, options[i])
-                    {
-                        Margin = StandardItemMargin
-                    };
-                }
-            }
-
-            window._slectionArea = new VirtualizingWrapPanel
-            {
-                ChildMaxHeight = OptionItemHeight,
-                ChildMaxWidth = OptionItemWidth,
+                ItemHeight = OptionItemHeight,
+                ItemWidth = OptionItemWidth,
                 Margin = new Thickness(OptionAreaMargin, OptionAreaMargin * 2f, OptionAreaMargin, OptionAreaMargin),
-                Filter = window.FilterOption,
-            }.Set(menuItems);
+                Filter = FilterOption,
+            };
 
             return new ScrollViewer
             {
-                Content = window._slectionArea,
+                Content = _slectionArea,
                 HorizontalScroll = true,
                 HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
                 VerticalScrollBarVisibility = ScrollBarVisibility.Hidden

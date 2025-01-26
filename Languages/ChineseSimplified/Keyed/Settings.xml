@@ -4,6 +4,28 @@
 	<!-- EN: Replace Context Menu -->
 	<NCCM.SettingsCategory.Label>替换右键菜单</NCCM.SettingsCategory.Label>
 
+	<!-- # Tab Items -->
+
+	<!-- EN: Normal -->
+	<NCCM.Settings.NormalSettings.Tab.Label>普通</NCCM.Settings.NormalSettings.Tab.Label>
+
+	<!-- EN: Advanced -->
+	<NCCM.Settings.AdvancedSettings.Tab.Label>高级</NCCM.Settings.AdvancedSettings.Tab.Label>
+	<!-- EN: More settings of menu replacement. -->
+	<NCCM.Settings.AdvancedSettings.Tab.Tooltip>有关菜单替换的详细设置。</NCCM.Settings.AdvancedSettings.Tab.Tooltip>
+
+	<!-- # Setting Entries -->
+
+	<!-- EN: Ask before replace -->
+	<NCCM.Settings.AskBeforeReplace.Label>替换前询问</NCCM.Settings.AskBeforeReplace.Label>
+	<!-- EN: After enabling this option, you will be asked whether to replace the menu when replacing the menu. -->
+	<NCCM.Settings.AskBeforeReplace.Tooltip>开启此项后，替换菜单时将询问是否替换菜单。</NCCM.Settings.AskBeforeReplace.Tooltip>
+
+	<!-- EN: Replace unknown source -->
+	<NCCM.Settings.ReplaceUnknownSource.Label>替换未知来源</NCCM.Settings.ReplaceUnknownSource.Label>
+	<!-- EN: After enabling this option, menus whose sources cannot be determined will be directly replaced. -->
+	<NCCM.Settings.ReplaceUnknownSource.Tooltip>开启此项后，无法判断来源的菜单将直接被替换。</NCCM.Settings.ReplaceUnknownSource.Tooltip>
+
 	<!-- EN: Auto focus search bar -->
 	<NCCM.Settings.FocusSearchBar.Label>搜索栏自动获得焦点</NCCM.Settings.FocusSearchBar.Label>
 	<!-- EN: After enabling this option, the focus will be automatically set to the search bar when the menu is opened. -->
@@ -38,5 +60,39 @@
 	<NCCM.Settings.UseVanillaRenderMode.Label>是否使用原版渲染方式</NCCM.Settings.UseVanillaRenderMode.Label>
 	<!-- EN: Enable this option to improve compatibility when encountering errors caused by this mod. -->
 	<NCCM.Settings.UseVanillaRenderMode.Tooltip>当遇到报错时，打开此项以提高兼容性。</NCCM.Settings.UseVanillaRenderMode.Tooltip>
+
+
+	<!-- # Message Box -->
+
+	<!-- EN: A replaceable menu has been found.\n\nWould you like to replace it?\n\n&#xE03C;color&#xE03D;gray&#xE03E;From：Replace Context Menu&#xE03C;&#xE02F;color&#xE03E; -->
+	<NCCN.ConfirmReplaceFloatMenu.Text>发现一个可替换的菜单，\n\n是否替换?</NCCN.ConfirmReplaceFloatMenu.Text>
+
+	<!-- EN: Yes -->
+	<NCCN.ConfirmReplaceFloatMenu.AcceptButton.Label>替换</NCCN.ConfirmReplaceFloatMenu.AcceptButton.Label>
+
+	<!-- EN: No -->
+	<NCCN.ConfirmReplaceFloatMenu.RejectButton.Label>保留</NCCN.ConfirmReplaceFloatMenu.RejectButton.Label>
+
+
+	<!-- # Advanced Setting Page -->
+
+	<!-- EN: Protected menu sources: -->
+	<NCCM.AdvancedSettings.Category.BlackList.Label>受保护的菜单源：</NCCM.AdvancedSettings.Category.BlackList.Label>
+	<!-- EN: Menus created by the following methods will not be replaced. -->
+	<NCCM.AdvancedSettings.Category.BlackList.Tooltip>由下列方法创建的菜单将不会被替换。</NCCM.AdvancedSettings.Category.BlackList.Tooltip>
+
+	<!-- EN: Replaced menu sources: -->
+	<NCCM.AdvancedSettings.Category.WhiteList.Label>将替换的菜单源：</NCCM.AdvancedSettings.Category.WhiteList.Label>
+	<!-- EN: Menus created by the following methods will be replaced. -->
+	<NCCM.AdvancedSettings.Category.WhiteList.Tooltip>由下列方法创建的菜单将会被替换。</NCCM.AdvancedSettings.Category.WhiteList.Tooltip>
+
+	<!-- EN: The full name of the method for creating a menu.  -->
+	<NCCM.ReplaceSettings.Entry.Tooltip>创建菜单的方法全称。</NCCM.ReplaceSettings.Entry.Tooltip>
+
+	<!-- EN: Reverse this menu source. -->
+	<NCCM.AdvancedSettings.Entry.SwitchButton.Tooltip>反转该菜单源。</NCCM.AdvancedSettings.Entry.SwitchButton.Tooltip>
+
+	<!-- EN: Remove this menu source. -->
+	<NCCM.AdvancedSettings.Entry.DeleteButton.Tooltip>移除该菜单源。</NCCM.AdvancedSettings.Entry.DeleteButton.Tooltip>
 
 </LanguageData>
