@@ -17,7 +17,7 @@ namespace NoCrowdedContextMenu
         {
             DeclaringTypeName = declaringType.Name;
             MethodName = methodName;
-            Namespace = declaringType.Namespace;
+            Namespace = declaringType.Namespace ?? string.Empty;
 
             _hashCode = DeclaringTypeName.GetHashCode() ^ MethodName.GetHashCode() ^ Namespace.GetHashCode();
         }
