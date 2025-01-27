@@ -15,8 +15,8 @@ namespace NoCrowdedContextMenu.SettingPages
     {
         private static Control _content;
 
-        private static StackPanel _protectedRecordPanel;
-        private static StackPanel _replaceRecordPanel;
+        private static VirtualizingStackPanel _protectedRecordPanel;
+        private static VirtualizingStackPanel _replaceRecordPanel;
 
         private static Rect _protectedRecordPanelRect;
         private static Rect _replaceRecordPanelRect;
@@ -43,11 +43,11 @@ namespace NoCrowdedContextMenu.SettingPages
                 NCCM.Settings.ReplacedMenuKeys = new HashSet<FloatMenuKey>();
             }
 
-            _protectedRecordPanel = new StackPanel { Margin = 4f }
+            _protectedRecordPanel = new VirtualizingStackPanel()
                 .Set(NCCM.Settings.ProtectedMenuKeys
                     .Select(key => new ReplaceRecordEntry(key, true)).ToArray());
 
-            _replaceRecordPanel = new StackPanel { Margin = 4f }
+            _replaceRecordPanel = new VirtualizingStackPanel()
                 .Set(NCCM.Settings.ReplacedMenuKeys
                     .Select(key => new ReplaceRecordEntry(key, false)).ToArray());
 
@@ -72,6 +72,7 @@ namespace NoCrowdedContextMenu.SettingPages
                             new ScrollViewer
                             {
                                 Content = _protectedRecordPanel,
+                                Margin = 4f,
                                 HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden
                             }
                         ),
@@ -89,6 +90,7 @@ namespace NoCrowdedContextMenu.SettingPages
                             new ScrollViewer
                             {
                                 Content = _replaceRecordPanel,
+                                Margin = 4f,
                                 HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden
                             }
                         )
