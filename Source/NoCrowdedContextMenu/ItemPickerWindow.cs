@@ -1,13 +1,9 @@
-﻿using NoCrowdedContextMenu.CustomControls;
-using Nebulae.RimWorld.UI;
-using Nebulae.RimWorld.UI.Controls;
+﻿using Nebulae.RimWorld.UI.Controls;
 using Nebulae.RimWorld.UI.Controls.Panels;
-using Nebulae.RimWorld.UI.Data;
 using Nebulae.RimWorld.UI.Data.Binding;
 using Nebulae.RimWorld.UI.Windows;
-using Nebulae.RimWorld.Utilities;
+using NoCrowdedContextMenu.CustomControls;
 using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -44,8 +40,6 @@ namespace NoCrowdedContextMenu
         //------------------------------------------------------
 
         #region Private Fields
-
-        private static readonly Texture2D SwitchMenuIcon = ContentFinder<Texture2D>.Get("UI/Buttons/MainButtons/Menu");
 
         private static Rect _previousWindowRect;
 

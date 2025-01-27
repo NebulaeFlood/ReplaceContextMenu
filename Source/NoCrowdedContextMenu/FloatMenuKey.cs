@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
 
 namespace NoCrowdedContextMenu
@@ -44,7 +39,7 @@ namespace NoCrowdedContextMenu
             }
         }
 
-        public override  int GetHashCode()
+        public override int GetHashCode()
         {
             return _hashCode;
         }
@@ -58,7 +53,7 @@ namespace NoCrowdedContextMenu
 
         public bool Equals(FloatMenuKey other)
         {
-            return DeclaringTypeName == other.DeclaringTypeName 
+            return DeclaringTypeName == other.DeclaringTypeName
                 && MethodName == other.MethodName;
         }
 

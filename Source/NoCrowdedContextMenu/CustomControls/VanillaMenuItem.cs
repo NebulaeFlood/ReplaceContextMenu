@@ -1,5 +1,4 @@
-﻿using Nebulae.RimWorld.UI;
-using Nebulae.RimWorld.UI.Controls;
+﻿using Nebulae.RimWorld.UI.Controls;
 using System;
 using UnityEngine;
 using Verse;

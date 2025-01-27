@@ -1,14 +1,10 @@
 ﻿using Nebulae.RimWorld.UI.Controls;
-using Nebulae.RimWorld.UI.Controls.Geomerties;
 using Nebulae.RimWorld.UI.Controls.Panels;
 using Nebulae.RimWorld.UI.Utilities;
-using NoCrowdedContextMenu;
 using NoCrowdedContextMenu.CustomControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Grid = Nebulae.RimWorld.UI.Controls.Panels.Grid;
@@ -40,7 +36,7 @@ namespace NoCrowdedContextMenu.SettingPages
             if (NCCM.Settings.ProtectedMenuKeys is null)
             {
                 NCCM.Settings.ProtectedMenuKeys = new HashSet<FloatMenuKey>();
-            }    
+            }
 
             if (NCCM.Settings.ReplacedMenuKeys is null)
             {
