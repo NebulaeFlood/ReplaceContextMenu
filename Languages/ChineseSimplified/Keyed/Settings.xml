@@ -49,7 +49,7 @@
 	<!-- EN: Number to trigger the replacement: -->
 	<NCCM.Settings.MinimumOptionCountCauseReplacement.Label>触发替换的最少选项数：</NCCM.Settings.MinimumOptionCountCauseReplacement.Label>
 	<!-- EN: When the number of options in the menu is greater than this number, we will replace the vanilla menu. -->
-	<NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>当菜单中选项多于此数时，替换原版菜单。</NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>
+	<NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>当菜单中选项多于此数时，\n替换原版菜单。</NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>
 
 	<!-- EN: Menu pause game -->
 	<NCCM.Settings.PauseGame.Label>是否暂停游戏</NCCM.Settings.PauseGame.Label>

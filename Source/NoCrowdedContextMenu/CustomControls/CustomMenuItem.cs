@@ -20,7 +20,6 @@ namespace NoCrowdedContextMenu.CustomControls
         #region Internal Const
 
         internal const float IconSize = 27f;
-        internal const float Padding = 5f;
 
         internal const float InfoTooltipXOffset = 4f;
         internal const float InfoTooltipYOffset = 16f;
@@ -41,9 +40,6 @@ namespace NoCrowdedContextMenu.CustomControls
 
         static CustomMenuItem()
         {
-            MarginProperty.OverrideMetadata(typeof(CustomMenuItem),
-                new ControlPropertyMetadata(new Thickness(Padding), ControlRelation.Measure));
-
             HorizontalAlignmentProperty.OverrideMetadata(typeof(CustomMenuItem),
                 new ControlPropertyMetadata(HorizontalAlignment.Stretch, ControlRelation.Measure));
 
@@ -79,9 +75,9 @@ namespace NoCrowdedContextMenu.CustomControls
         {
             Rect renderRect = base.ArrangeCore(availableRect);
             Rect contentRect = new Rect(
-                renderRect.x + Padding,
+                renderRect.x + 5f,
                 renderRect.y,
-                renderRect.width - Padding,
+                renderRect.width - 5f,
                 renderRect.height);
 
             if (_optionInfo.IconStatus is IconStatus.None)
@@ -116,15 +112,15 @@ namespace NoCrowdedContextMenu.CustomControls
             if (!string.IsNullOrEmpty(Text))
             {
                 _labelRectCache = new Rect(
-                    _iconRectCache.xMax + Padding,
+                    _iconRectCache.xMax + 5f,
                     contentRect.y,
-                    contentRect.width - _iconRectCache.width - Padding,
+                    contentRect.width - _iconRectCache.width - 5f,
                     contentRect.height);
             }
             else
             {
                 _labelRectCache = new Rect(
-                    _iconRectCache.xMax + Padding,
+                    _iconRectCache.xMax + 5f,
                     contentRect.y,
                     0f,
                     0f);

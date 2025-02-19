@@ -1,19 +1,19 @@
 ﻿using HarmonyLib;
+using Nebulae.RimWorld.UI;
 using NoCrowdedContextMenu.SettingPages;
 using Verse;
+using static NoCrowdedContextMenu.ItemPickerWindow;
 
 namespace NoCrowdedContextMenu
 {
     [StaticConstructorOnStartup]
     internal static class NCCMPatch
     {
-        private static ItemPickerWindow _itemPickerWindow;
-        private static FloatMenu _replacingMenu;
+        private static Window _replacingMenu;
 
 
         static NCCMPatch()
         {
-            _itemPickerWindow = new ItemPickerWindow();
         }
 
 
@@ -41,8 +41,8 @@ namespace NoCrowdedContextMenu
                     {
                         if (NCCM.Settings.ReplaceUnknownSource)
                         {
-                            _itemPickerWindow.SetOptions(menu, options);
-                            window = _itemPickerWindow;
+                            PickerWindow.SetOptions(menu, options);
+                            window = PickerWindow;
                         }
 
                         return true;
@@ -50,8 +50,8 @@ namespace NoCrowdedContextMenu
 
                     if (NCCM.Settings.ReplacedMenuKeys.Contains(key))
                     {
-                        _itemPickerWindow.SetOptions(menu, options);
-                        window = _itemPickerWindow;
+                        PickerWindow.SetOptions(menu, options);
+                        window = PickerWindow;
 
                         return true;
                     }
@@ -68,8 +68,10 @@ namespace NoCrowdedContextMenu
                         {
                             AdvancedSettingPage.AddRecord(key, false);
 
-                            _itemPickerWindow.SetOptions(menu, options);
-                            _itemPickerWindow.Show();
+                            _replacingMenu = PickerWindow;
+
+                            PickerWindow.SetOptions(menu, options);
+                            PickerWindow.Show();
                         },
                         "NCCN.ConfirmReplaceFloatMenu.RejectButton.Label".Translate(),
                         () =>
@@ -85,8 +87,8 @@ namespace NoCrowdedContextMenu
                 }
                 else
                 {
-                    _itemPickerWindow.SetOptions(menu, options);
-                    window = _itemPickerWindow;
+                    PickerWindow.SetOptions(menu, options);
+                    window = PickerWindow;
                 }
             }
 

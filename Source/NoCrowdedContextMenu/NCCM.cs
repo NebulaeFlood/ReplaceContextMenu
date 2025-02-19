@@ -8,9 +8,7 @@ namespace NoCrowdedContextMenu
 {
     public class NCCM : NebulaeMod<NCCMSettings>
     {
-
         internal const string UniqueId = "Nebulae.NoCrowdedContextMenu";
-
         internal static readonly Harmony HarmonyInstance;
 
 
@@ -35,13 +33,13 @@ namespace NoCrowdedContextMenu
             return new TabControl().Set(
                 new TabItem
                 {
-                    Content = new SettingPage(),
+                    Content = SettingPage.Instance,
                     Text = "NCCM.Settings.NormalSettings.Tab.Label".Translate(),
                     ShowTooltip = true
                 },
                 new TabItem
                 {
-                    Content = new AdvancedSettingPage(),
+                    Content = AdvancedSettingPage.Instance,
                     Text = "NCCM.Settings.AdvancedSettings.Tab.Label".Translate(),
                     Tooltip = "NCCM.Settings.AdvancedSettings.Tab.Tooltip".Translate(),
                     ShowTooltip = true

@@ -2,6 +2,7 @@
 using Nebulae.RimWorld.UI.Controls.Panels;
 using Nebulae.RimWorld.UI.Utilities;
 using NoCrowdedContextMenu.CustomControls;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ using Grid = Nebulae.RimWorld.UI.Controls.Panels.Grid;
 
 namespace NoCrowdedContextMenu.SettingPages
 {
-    internal class AdvancedSettingPage : FrameworkControl
+    internal class AdvancedSettingPage : UserControl
     {
-        private static Control _content;
+        internal static readonly AdvancedSettingPage Instance = new AdvancedSettingPage();
 
         private static VirtualizingStackPanel _protectedRecordPanel;
         private static VirtualizingStackPanel _replaceRecordPanel;
@@ -21,28 +22,53 @@ namespace NoCrowdedContextMenu.SettingPages
         private static Rect _protectedRecordPanelRect;
         private static Rect _replaceRecordPanelRect;
 
+        private static Color _borderColor = Color.gray;
 
-        static AdvancedSettingPage()
+
+        private AdvancedSettingPage()
         {
-            HorizontalAlignmentProperty.OverrideMetadata(typeof(AdvancedSettingPage),
-                new ControlPropertyMetadata(HorizontalAlignment.Stretch, ControlRelation.Measure));
-
-            VerticalAlignmentProperty.OverrideMetadata(typeof(AdvancedSettingPage),
-                new ControlPropertyMetadata(VerticalAlignment.Stretch, ControlRelation.Measure));
+            Initialize();
         }
 
-        internal AdvancedSettingPage()
+
+        internal static void AddRecord(FloatMenuKey key, bool isProtected)
         {
-            if (NCCM.Settings.ProtectedMenuKeys is null)
+            if (isProtected)
             {
-                NCCM.Settings.ProtectedMenuKeys = new HashSet<FloatMenuKey>();
+                _protectedRecordPanel.Append(new ReplaceRecordEntry(key, true));
+
+                NCCM.Settings.ProtectedMenuKeys.Add(key);
+            }
+            else
+            {
+                _replaceRecordPanel.Append(new ReplaceRecordEntry(key, false));
+
+                NCCM.Settings.ReplacedMenuKeys.Add(key);
             }
 
-            if (NCCM.Settings.ReplacedMenuKeys is null)
-            {
-                NCCM.Settings.ReplacedMenuKeys = new HashSet<FloatMenuKey>();
-            }
+            NCCM.Settings.Write();
+        }
 
+        //------------------------------------------------------
+        //
+        //  Protected Methods
+        //
+        //------------------------------------------------------
+
+        #region Protected Methods
+
+        protected override Rect ArrangeCore(Rect availableRect)
+        {
+            availableRect = base.ArrangeCore(availableRect);
+
+            _protectedRecordPanelRect = _protectedRecordPanel.GetParent().DesiredRect;
+            _replaceRecordPanelRect = _replaceRecordPanel.GetParent().DesiredRect;
+
+            return availableRect;
+        }
+
+        protected override Control CreateContent()
+        {
             _protectedRecordPanel = new VirtualizingStackPanel()
                 .Set(NCCM.Settings.ProtectedMenuKeys
                     .Select(key => new ReplaceRecordEntry(key, true)).ToArray());
@@ -51,7 +77,7 @@ namespace NoCrowdedContextMenu.SettingPages
                 .Set(NCCM.Settings.ReplacedMenuKeys
                     .Select(key => new ReplaceRecordEntry(key, false)).ToArray());
 
-            _content = new StackPanel
+            return new StackPanel
             {
                 ChildMaxHeight = 0.5f,
                 Margin = 4f
@@ -95,64 +121,13 @@ namespace NoCrowdedContextMenu.SettingPages
                             }
                         )
                 );
-
-            _content.SetParent(this);
-        }
-
-
-        internal static void AddRecord(FloatMenuKey key, bool isProtected)
-        {
-            if (isProtected)
-            {
-                _protectedRecordPanel.Append(new ReplaceRecordEntry(key, true));
-
-                NCCM.Settings.ProtectedMenuKeys.Add(key);
-            }
-            else
-            {
-                _replaceRecordPanel.Append(new ReplaceRecordEntry(key, false));
-
-                NCCM.Settings.ReplacedMenuKeys.Add(key);
-            }
-
-            NCCM.Settings.Write();
-        }
-
-
-        //------------------------------------------------------
-        //
-        //  Protected Methods
-        //
-        //------------------------------------------------------
-
-        #region Protected Methods
-
-        protected override Rect ArrangeCore(Rect availableRect)
-        {
-            availableRect = _content.Arrange(base.ArrangeCore(availableRect));
-
-            _protectedRecordPanelRect = _protectedRecordPanel.GetParent().DesiredRect;
-            _replaceRecordPanelRect = _replaceRecordPanel.GetParent().DesiredRect;
-
-            return availableRect;
         }
 
         protected override void DrawCore()
         {
-            UIUtility.DrawRectangle(_protectedRecordPanelRect, Widgets.WindowBGFillColor, 1f, Color.gray);
-            UIUtility.DrawRectangle(_replaceRecordPanelRect, Widgets.WindowBGFillColor, 1f, Color.gray);
-
-            _content.Draw();
-        }
-
-        protected override Size MeasureCore(Size availableSize)
-        {
-            return _content.Measure(base.MeasureCore(availableSize));
-        }
-
-        protected override Rect SegmentCore(Rect visiableRect)
-        {
-            return _content.Segment(base.SegmentCore(visiableRect));
+            UIUtility.DrawRectangle(_protectedRecordPanelRect, Widgets.WindowBGFillColor, _borderColor);
+            UIUtility.DrawRectangle(_replaceRecordPanelRect, Widgets.WindowBGFillColor, _borderColor);
+            base.DrawCore();
         }
 
         #endregion

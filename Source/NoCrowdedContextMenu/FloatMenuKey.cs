@@ -6,20 +6,20 @@ namespace NoCrowdedContextMenu
 {
     public struct FloatMenuKey : IEquatable<FloatMenuKey>, IExposable
     {
-        internal string DeclaringTypeName;
-        internal string MethodName;
-        internal string Namespace;
+        private string _declaringTypeName;
+        private string _methodName;
+        private string _namespace;
 
         private int _hashCode;
 
 
         public FloatMenuKey(Type declaringType, string methodName)
         {
-            DeclaringTypeName = declaringType.Name;
-            MethodName = methodName;
-            Namespace = declaringType.Namespace ?? string.Empty;
+            _declaringTypeName = declaringType.Name;
+            _methodName = methodName;
+            _namespace = declaringType.Namespace ?? string.Empty;
 
-            _hashCode = DeclaringTypeName.GetHashCode() ^ MethodName.GetHashCode() ^ Namespace.GetHashCode();
+            _hashCode = _declaringTypeName.GetHashCode() ^ _methodName.GetHashCode() ^ _namespace.GetHashCode();
         }
 
 
@@ -47,22 +47,36 @@ namespace NoCrowdedContextMenu
         public override bool Equals(object obj)
         {
             return obj is FloatMenuKey other
-                && DeclaringTypeName == other.DeclaringTypeName
-                && MethodName == other.MethodName;
+                && _declaringTypeName == other._declaringTypeName
+                && _methodName == other._methodName
+                && _namespace == other._namespace;
         }
 
         public bool Equals(FloatMenuKey other)
         {
-            return DeclaringTypeName == other.DeclaringTypeName
-                && MethodName == other.MethodName;
+            return _declaringTypeName == other._declaringTypeName
+                && _methodName == other._methodName
+                && _namespace == other._namespace;
         }
 
         public void ExposeData()
         {
-            Scribe_Values.Look(ref DeclaringTypeName, "DeclaringType");
-            Scribe_Values.Look(ref MethodName, "Method");
-            Scribe_Values.Look(ref Namespace, "Namespace");
+            Scribe_Values.Look(ref _declaringTypeName, "DeclaringType");
+            Scribe_Values.Look(ref _methodName, "Method");
+            Scribe_Values.Look(ref _namespace, "_namespace");
             Scribe_Values.Look(ref _hashCode, "HashCode");
+        }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(_namespace))
+            {
+                return $"{_declaringTypeName}.{_methodName}";
+            }
+            else
+            {
+                return $"{_namespace}.{_declaringTypeName}.{_methodName}";
+            }
         }
     }
 }

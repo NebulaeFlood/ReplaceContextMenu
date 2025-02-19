@@ -33,6 +33,9 @@ namespace NoCrowdedContextMenu
         #endregion
 
 
+        public static readonly ItemPickerWindow PickerWindow = new ItemPickerWindow();
+
+
         //------------------------------------------------------
         //
         //  Private Fields
@@ -66,7 +69,7 @@ namespace NoCrowdedContextMenu
         }
 
 
-        public ItemPickerWindow()
+        internal ItemPickerWindow()
         {
             absorbInputAroundWindow = true;
             closeOnClickedOutside = true;

@@ -36,6 +36,19 @@ namespace NoCrowdedContextMenu
 
             Scribe_Collections.Look(ref ProtectedMenuKeys, nameof(ProtectedMenuKeys), LookMode.Deep);
             Scribe_Collections.Look(ref ReplacedMenuKeys, nameof(ReplacedMenuKeys), LookMode.Deep);
+
+            if (Scribe.mode is LoadSaveMode.PostLoadInit)
+            {
+                if (ProtectedMenuKeys is null)
+                {
+                    ProtectedMenuKeys = new HashSet<FloatMenuKey>();
+                }
+
+                if (ReplacedMenuKeys is null)
+                {
+                    ReplacedMenuKeys = new HashSet<FloatMenuKey>();
+                }
+            }
         }
     }
 }
