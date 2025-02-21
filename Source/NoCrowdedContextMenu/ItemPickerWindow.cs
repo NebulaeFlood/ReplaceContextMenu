@@ -109,8 +109,6 @@ namespace NoCrowdedContextMenu
             }
 
             SearchBarText = string.Empty;
-
-            BindingManager.Unbind(this);
             base.PostClose();
         }
 
