@@ -19,6 +19,9 @@
 	<NCCM.Settings.ReplaceUnknownSource.Label>Replace unknown source</NCCM.Settings.ReplaceUnknownSource.Label>
 	<NCCM.Settings.ReplaceUnknownSource.Tooltip>After enabling this option, menus whose sources cannot be determined will be directly replaced.</NCCM.Settings.ReplaceUnknownSource.Tooltip>
 
+	<NCCM.Settings.CloseOnClickOutSide.Label>Close menu on click outside</NCCM.Settings.CloseOnClickOutSide.Label>
+	<NCCM.Settings.CloseOnClickOutSide.Tooltip>After enabling this option, clicking outside the menu will close it.</NCCM.Settings.CloseOnClickOutSide.Tooltip>
+
 	<NCCM.Settings.FocusSearchBar.Label>Auto focus search bar</NCCM.Settings.FocusSearchBar.Label>
 	<NCCM.Settings.FocusSearchBar.Tooltip>After enabling this option, the focus will be automatically set to the search bar when the menu is opened.</NCCM.Settings.FocusSearchBar.Tooltip>
 

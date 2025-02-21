@@ -30,6 +30,7 @@ namespace NoCrowdedContextMenu.SettingPages
                 (
                     CreateEntry(nameof(NCCM.Settings.AskBeforeReplace)),
                     CreateEntry(nameof(NCCM.Settings.ReplaceUnknownSource)),
+                    CreateEntry(nameof(NCCM.Settings.CloseOnClickOutSide)),
                     CreateEntry(nameof(NCCM.Settings.FocusSearchBar)),
                     CreateEntry(nameof(NCCM.Settings.HasMemory)),
                     CreateEntry(nameof(NCCM.Settings.IsDragable)),
@@ -41,11 +42,21 @@ namespace NoCrowdedContextMenu.SettingPages
                         nameof(NCCM.Settings.MinimumOptionCountCauseReplacement),
                         "NCCM.Settings.MinimumOptionCountCauseReplacement.Label".Translate(),
                         "NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip".Translate(),
-                        8f,
+                        1f,
                         200f,
                         0,
                         1f)
                 );
+        }
+
+        protected override void DrawCore()
+        {
+            base.DrawCore();
+
+            if (ItemPickerWindow.PickerWindow.IsOpen)
+            {
+                ItemPickerWindow.PickerWindow.Close();
+            }
         }
 
 

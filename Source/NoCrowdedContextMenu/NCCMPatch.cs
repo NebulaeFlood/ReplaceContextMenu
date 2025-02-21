@@ -1,6 +1,8 @@
 ﻿using HarmonyLib;
 using Nebulae.RimWorld.UI;
 using NoCrowdedContextMenu.SettingPages;
+using RimWorld;
+using System.Collections.Generic;
 using Verse;
 using static NoCrowdedContextMenu.ItemPickerWindow;
 
@@ -9,6 +11,12 @@ namespace NoCrowdedContextMenu
     [StaticConstructorOnStartup]
     internal static class NCCMPatch
     {
+        internal static bool IsBuildPickerMenu = false;
+        internal static List<Designator> BuildOptions;
+
+        internal static bool IsMaterialPickerMenu = false;
+        internal static BuildableDef BuildRequireMaterial;
+
         private static Window _replacingMenu;
 
 
@@ -16,8 +24,22 @@ namespace NoCrowdedContextMenu
         {
         }
 
+        internal static void Designator_Build_ProcessInputPrefix(Designator_Build __instance)
+        {
+            if (__instance.PlacingDef is BuildableDef def
+                && def.MadeFromStuff)
+            {
+                IsMaterialPickerMenu = true;
+                BuildRequireMaterial = def;
+            }
+        }
 
-        [HarmonyPrefix]
+        internal static void Designator_Dropdown_ProcessInputPrefix(Designator_Dropdown __instance)
+        {
+            IsBuildPickerMenu = true;
+            BuildOptions = __instance.Elements.FindAll(x => x.Visible);
+        }
+
         internal static bool WindowStack_AddPrefix(WindowStack __instance, ref Window window)
         {
             if (ReferenceEquals(_replacingMenu, window))
@@ -89,6 +111,8 @@ namespace NoCrowdedContextMenu
                 {
                     PickerWindow.SetOptions(menu, options);
                     window = PickerWindow;
+
+                    return true;
                 }
             }
 

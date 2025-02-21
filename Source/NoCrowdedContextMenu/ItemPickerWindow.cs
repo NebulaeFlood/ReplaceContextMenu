@@ -1,4 +1,5 @@
-﻿using Nebulae.RimWorld.UI.Controls;
+﻿using Nebulae.RimWorld.UI;
+using Nebulae.RimWorld.UI.Controls;
 using Nebulae.RimWorld.UI.Controls.Panels;
 using Nebulae.RimWorld.UI.Data.Binding;
 using Nebulae.RimWorld.UI.Windows;
@@ -33,7 +34,8 @@ namespace NoCrowdedContextMenu
         #endregion
 
 
-        public static readonly ItemPickerWindow PickerWindow = new ItemPickerWindow();
+        internal static bool AnyItemHovered = false;
+        internal static ItemPickerWindow PickerWindow = new ItemPickerWindow();
 
 
         //------------------------------------------------------
@@ -51,7 +53,6 @@ namespace NoCrowdedContextMenu
         private VirtualizingWrapPanel _slectionArea;
 
         #endregion
-
 
         public string SearchBarText
         {
@@ -71,8 +72,6 @@ namespace NoCrowdedContextMenu
 
         internal ItemPickerWindow()
         {
-            absorbInputAroundWindow = true;
-            closeOnClickedOutside = true;
             doCloseButton = false;
             drawInScreenshotMode = false;
             preventCameraMotion = false;
@@ -97,6 +96,19 @@ namespace NoCrowdedContextMenu
 
         #region Public Methods
 
+        protected override void LateWindowOnGUI(Rect inRect)
+        {
+            if (AnyItemHovered)
+            {
+                AnyItemHovered = false;
+                MaterialInfoWindow.Open();
+            }
+            else
+            {
+                MaterialInfoWindow.Hide();
+            }
+        }
+
         public override void PostClose()
         {
             if (NCCM.Settings.HasMemory)
@@ -109,6 +121,11 @@ namespace NoCrowdedContextMenu
             }
 
             SearchBarText = string.Empty;
+
+            NCCMPatch.IsBuildPickerMenu = false;
+            NCCMPatch.IsMaterialPickerMenu = false;
+            NCCMPatch.BuildRequireMaterial = null;
+
             base.PostClose();
         }
 
@@ -116,7 +133,8 @@ namespace NoCrowdedContextMenu
         {
             base.PreOpen();
 
-            if (NCCM.Settings.FocusSearchBar)
+            if (NCCM.Settings.FocusSearchBar
+                || Current.ProgramState is ProgramState.Entry)
             {
                 _searchTextBox.GetFocus();
             }
@@ -146,7 +164,7 @@ namespace NoCrowdedContextMenu
                 for (int i = 0; i < menuItems.Length; i++)
                 {
                     options[i].SetSizeMode(FloatMenuSizeMode.Normal);
-                    menuItems[i] = new CustomMenuItem(this, menu, options[i])
+                    menuItems[i] = new CustomMenuItem(this, menu, options[i], i)
                     {
                         Margin = StandardItemMargin
                     };
@@ -155,6 +173,7 @@ namespace NoCrowdedContextMenu
 
             _slectionArea.Set(menuItems);
 
+            closeOnClickedOutside = NCCM.Settings.CloseOnClickOutSide;
             draggable = NCCM.Settings.IsDragable;
             resizeable = NCCM.Settings.IsResizable;
             forcePause = NCCM.Settings.PauseGame;

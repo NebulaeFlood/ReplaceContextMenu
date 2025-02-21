@@ -1,5 +1,6 @@
 ﻿using Nebulae.RimWorld.UI.Controls;
 using Nebulae.RimWorld.UI.Utilities;
+using Nebulae.RimWorld.Utilities;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -47,7 +48,7 @@ namespace NoCrowdedContextMenu.CustomControls
                 new ControlPropertyMetadata(VerticalAlignment.Stretch, ControlRelation.Measure));
         }
 
-        internal CustomMenuItem(ItemPickerWindow window, FloatMenu originalMenu, FloatMenuOption option)
+        internal CustomMenuItem(ItemPickerWindow window, FloatMenu originalMenu, FloatMenuOption option, int index)
         {
             IsEnabled = option.action != null;
             ClickSound = IsEnabled
@@ -67,7 +68,7 @@ namespace NoCrowdedContextMenu.CustomControls
                 ShowTooltip = true;
             }
 
-            _optionInfo = new OptionInfo(option);
+            _optionInfo = new OptionInfo(option, index);
         }
 
 
@@ -141,20 +142,31 @@ namespace NoCrowdedContextMenu.CustomControls
 
             if (isCursorOver)
             {
-                if (isEnabled)
-                {
-                    background = isPressing
-                        ? Button.DefaultPressedBackground
-                        : Button.DefaultMouseOverBackground;
-                }
-
                 Vector2 mousePos = Input.mousePosition / Prefs.UIScale;
                 mousePos.y = UI.screenHeight - mousePos.y;
 
-                if (_option.mouseoverGuiAction != null
-                    && ReferenceEquals(Find.WindowStack.GetWindowAt(mousePos), _owner))
+                if (ReferenceEquals(Find.WindowStack.GetWindowAt(mousePos), _owner))
                 {
-                    _option.mouseoverGuiAction.Invoke(new Rect(
+                    if (isEnabled)
+                    {
+                        background = isPressing
+                            ? Button.DefaultPressedBackground
+                            : Button.DefaultMouseOverBackground;
+                    }
+
+                    if (_optionInfo.ShowMaterialInfoWindow
+                        && !ItemPickerWindow.AnyItemHovered)
+                    {
+                        ItemPickerWindow.AnyItemHovered = true;
+                        MaterialInfoWindow.Initialize(_optionInfo,
+                            new Rect(
+                                _owner.windowRect.x - 220f,
+                                _owner.windowRect.y,
+                                220f,
+                                320f));
+                    }
+
+                    _option.mouseoverGuiAction?.Invoke(new Rect(
                         mousePos.x - _owner.windowRect.x,
                         mousePos.y - _owner.windowRect.y + InfoTooltipYOffset,
                         InfoTooltipXOffset,
@@ -205,9 +217,10 @@ namespace NoCrowdedContextMenu.CustomControls
 
             ClickSound?.PlayOneShotOnCamera();
 
+            _owner.Close();
+            MaterialInfoWindow.Hide();
             _originalMenu.PreOptionChosen(_option);
             _option.action.Invoke();
-            _owner.Close();
         }
 
         protected override Rect SegmentCore(Rect visiableRect)
@@ -217,142 +230,6 @@ namespace NoCrowdedContextMenu.CustomControls
             UpdateHitTestRect(visiableRect);
 
             return visiableRect;
-        }
-
-
-        private enum IconStatus
-        {
-            None,
-            FromDef,
-            FromTexture,
-            FromThing,
-            LayerOnly
-        }
-
-
-        private readonly struct OptionInfo
-        {
-            //------------------------------------------------------
-            //
-            //  Private Fields
-            //
-            //------------------------------------------------------
-
-            #region Private Fields
-
-            private readonly Thing _iconThing;
-            private readonly Texture2D _itemIcon;
-            private readonly ThingDef _shownItem;
-            private readonly ThingStyleDef _thingStyle;
-
-            private readonly Color _compositionColor;
-            private readonly Color _iconColor;
-            private readonly Rect _iconTexCoords;
-
-            private readonly bool _drawLayer;
-
-            #endregion
-
-
-            internal readonly bool HasInfoCard;
-            internal readonly IconStatus IconStatus;
-
-
-            internal OptionInfo(FloatMenuOption option)
-            {
-                _drawLayer = FieldAccessUtility.DrawPlaceHolderIconGetter(option);
-                _iconThing = FieldAccessUtility.IconThingGetter(option);
-                _itemIcon = FieldAccessUtility.ItemIconGetter(option);
-                _shownItem = FieldAccessUtility.ShownItemGetter(option);
-
-                _compositionColor = Color.white;
-                _iconColor = option.iconColor;
-                _iconTexCoords = option.iconTexCoords;
-                _thingStyle = null;
-
-                HasInfoCard = option.extraPartOnGUI != null;
-
-                if (_shownItem != null)
-                {
-                    IconStatus = IconStatus.FromDef;
-
-                    if (option.forceBasicStyle)
-                    {
-                        _thingStyle = null;
-                    }
-                    else
-                    {
-                        _thingStyle = FieldAccessUtility.ThingStyleGetter(option)
-                            ?? Faction.OfPlayer.ideos?.PrimaryIdeo.GetStyleFor(_shownItem);
-                    }
-
-                    if (option.forceThingColor.HasValue)
-                    {
-                        _compositionColor = option.forceThingColor.Value;
-                    }
-                    else
-                    {
-                        _compositionColor = _shownItem.MadeFromStuff
-                             ? _shownItem.GetColorForStuff(GenStuff.DefaultStuffFor(_shownItem))
-                             : _shownItem.uiIconColor;
-                    }
-                }
-                else if (_itemIcon != null)
-                {
-                    IconStatus = IconStatus.FromTexture;
-                }
-                else if (_iconThing != null)
-                {
-                    IconStatus = IconStatus.FromThing;
-                }
-                else
-                {
-                    IconStatus = _drawLayer
-                        ? IconStatus.LayerOnly
-                        : IconStatus.None;
-                }
-            }
-
-
-            internal void DrawIcon(Rect iconRect)
-            {
-                if (_drawLayer)
-                {
-                    Widgets.DrawTextureFitted(iconRect, Widgets.PlaceholderIconTex, 1f);
-                }
-
-                if (IconStatus is IconStatus.None
-                    || IconStatus is IconStatus.LayerOnly)
-                {
-                    return;
-                }
-
-                Color color = GUI.color;
-                GUI.color = new Color(
-                    _iconColor.r,
-                    _iconColor.g,
-                    _iconColor.b,
-                    _iconColor.a * color.a);
-
-                if (IconStatus is IconStatus.FromDef)
-                {
-                    Widgets.DefIcon(iconRect, _shownItem, thingStyleDef: _thingStyle, color: new Color(
-                        _compositionColor.r,
-                        _compositionColor.g,
-                        _compositionColor.b,
-                        _compositionColor.a * color.a));
-                }
-                else if (IconStatus is IconStatus.FromTexture)
-                {
-                    Widgets.DrawTextureFitted(iconRect, _itemIcon, 1f, new Vector2(1f, 1f), _iconTexCoords);
-                }
-                else
-                {
-                    Widgets.ThingIcon(iconRect, _iconThing);
-                }
-
-                GUI.color = color;
-            }
         }
     }
 }

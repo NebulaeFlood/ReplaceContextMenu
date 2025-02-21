@@ -26,6 +26,11 @@
 	<!-- EN: After enabling this option, menus whose sources cannot be determined will be directly replaced. -->
 	<NCCM.Settings.ReplaceUnknownSource.Tooltip>开启此项后，无法判断来源的菜单将直接被替换。</NCCM.Settings.ReplaceUnknownSource.Tooltip>
 
+	<!-- EN: Close menu on click outside -->
+	<NCCM.Settings.CloseOnClickOutSide.Label>点击菜单外部时关闭菜单</NCCM.Settings.CloseOnClickOutSide.Label>
+	<!-- EN: After enabling this option, clicking outside the menu will close it. -->
+	<NCCM.Settings.CloseOnClickOutSide.Tooltip>开启此项后，点击菜单以外的空间将关闭菜单。</NCCM.Settings.CloseOnClickOutSide.Tooltip>
+
 	<!-- EN: Auto focus search bar -->
 	<NCCM.Settings.FocusSearchBar.Label>搜索栏自动获得焦点</NCCM.Settings.FocusSearchBar.Label>
 	<!-- EN: After enabling this option, the focus will be automatically set to the search bar when the menu is opened. -->

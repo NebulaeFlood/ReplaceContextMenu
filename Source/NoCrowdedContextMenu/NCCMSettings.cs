@@ -8,6 +8,7 @@ namespace NoCrowdedContextMenu
         public bool AskBeforeReplace = true;
         public bool ReplaceUnknownSource = true;
 
+        public bool CloseOnClickOutSide = false;
         public bool FocusSearchBar = false;
         public bool HasMemory = false;
         public bool IsDragable = true;
@@ -25,6 +26,7 @@ namespace NoCrowdedContextMenu
             Scribe_Values.Look(ref AskBeforeReplace, nameof(FocusSearchBar), true);
             Scribe_Values.Look(ref ReplaceUnknownSource, nameof(FocusSearchBar), true);
 
+            Scribe_Values.Look(ref CloseOnClickOutSide, nameof(CloseOnClickOutSide), false);
             Scribe_Values.Look(ref FocusSearchBar, nameof(FocusSearchBar), false);
             Scribe_Values.Look(ref HasMemory, nameof(HasMemory), false);
             Scribe_Values.Look(ref IsDragable, nameof(IsDragable), true);
