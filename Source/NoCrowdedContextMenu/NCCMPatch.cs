@@ -1,6 +1,4 @@
-﻿using HarmonyLib;
-using Nebulae.RimWorld.UI;
-using NoCrowdedContextMenu.SettingPages;
+﻿using NoCrowdedContextMenu.SettingPages;
 using RimWorld;
 using System.Collections.Generic;
 using Verse;

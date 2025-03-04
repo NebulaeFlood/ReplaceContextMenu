@@ -1,5 +1,4 @@
 ﻿using Nebulae.RimWorld.UI.Controls;
-using Nebulae.RimWorld.UI.Utilities;
 using NoCrowdedContextMenu.SettingPages;
 using RimWorld;
 using UnityEngine;
@@ -60,7 +59,7 @@ namespace NoCrowdedContextMenu.CustomControls
             };
             deleteButton.Clicked += AdvancedSettingPage.RemoveSavedKey;
 
-            return new Border 
+            return new Border
             {
                 Background = Widgets.LightHighlight,
                 Content = new Grid()

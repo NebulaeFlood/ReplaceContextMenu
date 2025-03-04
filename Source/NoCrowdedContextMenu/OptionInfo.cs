@@ -1,11 +1,4 @@
-﻿using Nebulae.RimWorld.Utilities;
-using NoCrowdedContextMenu;
-using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -192,16 +185,16 @@ namespace NoCrowdedContextMenu
                     ? (NCCMPatch.BuildOptions[index] as Designator_Place)?.PlacingDef
                     : null;
 
-                ShowMaterialInfoWindow = 
+                ShowMaterialInfoWindow =
                     (NCCMPatch.IsMaterialPickerMenu
                         && NCCMPatch.BuildRequireMaterial is BuildableDef def
                         && (def.CostStuffCount > 0
                             || def.costList.Count == 1))
-                    || 
+                    ||
                     (NCCMPatch.IsBuildPickerMenu
                         && _associatedBuild != null
                         && _shownItem != null
-                        && (_associatedBuild.CostStuffCount > 0 
+                        && (_associatedBuild.CostStuffCount > 0
                             || _associatedBuild.costList.Count == 1));
             }
         }

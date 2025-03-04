@@ -1,5 +1,4 @@
-﻿using Nebulae.RimWorld.UI;
-using Nebulae.RimWorld.UI.Controls;
+﻿using Nebulae.RimWorld.UI.Controls;
 using Nebulae.RimWorld.UI.Controls.Panels;
 using Nebulae.RimWorld.UI.Data.Binding;
 using Nebulae.RimWorld.UI.Windows;

@@ -1,6 +1,5 @@
 ﻿using Nebulae.RimWorld.UI.Controls;
 using Nebulae.RimWorld.UI.Utilities;
-using Nebulae.RimWorld.Utilities;
 using NoCrowdedContextMenu.Windows;
 using RimWorld;
 using UnityEngine;
