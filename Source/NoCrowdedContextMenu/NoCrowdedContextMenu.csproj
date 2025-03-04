@@ -62,10 +62,10 @@
       <Version>2.3.5</Version>
     </PackageReference>
     <PackageReference Include="Nebulae.RimWorld">
-      <Version>1.1.1</Version>
+      <Version>1.1.2</Version>
     </PackageReference>
     <PackageReference Include="Nebulae.RimWorld.UI">
-      <Version>1.5.2</Version>
+      <Version>1.5.3</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
