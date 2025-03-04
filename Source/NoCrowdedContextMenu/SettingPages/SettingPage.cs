@@ -15,8 +15,6 @@ namespace NoCrowdedContextMenu.SettingPages
     {
         internal static readonly SettingPage Instance = new SettingPage();
 
-        internal const float RowHeight = 40f;
-        internal const float NumberBoxWidth = 100f;
 
         private SettingPage()
         {
@@ -26,47 +24,9 @@ namespace NoCrowdedContextMenu.SettingPages
 
         protected override Control CreateContent()
         {
-            return new StackPanel { Margin = 10f }.Set
-                (
-                    CreateEntry(nameof(NCCM.Settings.AskBeforeReplace)),
-                    CreateEntry(nameof(NCCM.Settings.ReplaceUnknownSource)),
-                    CreateEntry(nameof(NCCM.Settings.CloseOnClickOutSide)),
-                    CreateEntry(nameof(NCCM.Settings.FocusSearchBar)),
-                    CreateEntry(nameof(NCCM.Settings.HasMemory)),
-                    CreateEntry(nameof(NCCM.Settings.IsDragable)),
-                    CreateEntry(nameof(NCCM.Settings.IsResizable)),
-                    CreateEntry(nameof(NCCM.Settings.PauseGame)),
-                    CreateEntry(nameof(NCCM.Settings.UseVanillaRenderMode)),
-                    ModSettingLayoutUtility.CreateNumberEntry(
-                        NCCM.Settings,
-                        nameof(NCCM.Settings.MinimumOptionCountCauseReplacement),
-                        "NCCM.Settings.MinimumOptionCountCauseReplacement.Label".Translate(),
-                        "NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip".Translate(),
-                        1f,
-                        200f,
-                        0,
-                        1f)
-                );
-        }
-
-        protected override void DrawCore()
-        {
-            base.DrawCore();
-
-            if (ItemPickerWindow.PickerWindow.IsOpen)
-            {
-                ItemPickerWindow.PickerWindow.Close();
-            }
-        }
-
-
-        private static CheckBox CreateEntry(string key)
-        {
-            return ModSettingLayoutUtility.CreateBooleanEntry(
-                NCCM.Settings,
-                key,
-                ("NCCM.Settings." + key + ".Label").Translate(),
-                ("NCCM.Settings." + key + ".Tooltip").Translate());
+            var panel = NCCM.Settings.CreateEntries(false);
+            panel.Margin = 10f;
+            return panel;
         }
     }
 }

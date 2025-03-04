@@ -11,7 +11,7 @@ using UnityEngine;
 using Verse;
 using Grid = Nebulae.RimWorld.UI.Controls.Panels.Grid;
 
-namespace NoCrowdedContextMenu
+namespace NoCrowdedContextMenu.Windows
 {
     [StaticConstructorOnStartup]
     internal class ItemPickerWindow : ControlWindow
@@ -53,6 +53,7 @@ namespace NoCrowdedContextMenu
         private VirtualizingWrapPanel _slectionArea;
 
         #endregion
+
 
         public string SearchBarText
         {
@@ -119,6 +120,8 @@ namespace NoCrowdedContextMenu
             {
                 _previousWindowRect = Rect.zero;
             }
+
+            _slectionArea.Clear();
 
             SearchBarText = string.Empty;
 

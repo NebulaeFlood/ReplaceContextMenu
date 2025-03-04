@@ -39,13 +39,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FloatMenuType.cs" />
-    <Compile Include="MaterialInfoWindow.cs" />
+    <Compile Include="Windows\MaterialInfoWindow.cs" />
     <Compile Include="NCCMPatch.cs" />
     <Compile Include="NCCMSettings.cs" />
     <Compile Include="OptionInfo.cs" />
     <Compile Include="SettingPages\AdvancedSettingPage.cs" />
     <Compile Include="FloatMenuKey.cs" />
-    <Compile Include="ItemPickerWindow.cs" />
+    <Compile Include="Windows\ItemPickerWindow.cs" />
     <Compile Include="CustomControls\CustomMenuItem.cs" />
     <Compile Include="FieldAccessUtility.cs" />
     <Compile Include="NCCM.cs" />
@@ -59,13 +59,13 @@
       <Version>1.5.4297</Version>
     </PackageReference>
     <PackageReference Include="Lib.Harmony">
-      <Version>2.3.3</Version>
+      <Version>2.3.5</Version>
     </PackageReference>
     <PackageReference Include="Nebulae.RimWorld">
-      <Version>1.1.0</Version>
+      <Version>1.1.1</Version>
     </PackageReference>
     <PackageReference Include="Nebulae.RimWorld.UI">
-      <Version>1.4.4</Version>
+      <Version>1.5.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

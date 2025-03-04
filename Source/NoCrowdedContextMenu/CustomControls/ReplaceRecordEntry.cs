@@ -32,14 +32,6 @@ namespace NoCrowdedContextMenu.CustomControls
         }
 
 
-        //------------------------------------------------------
-        //
-        //  Protected Methods
-        //
-        //------------------------------------------------------
-
-        #region Protected Methods
-
         protected override Control CreateContent()
         {
             var infoLabel = new Label
@@ -68,17 +60,13 @@ namespace NoCrowdedContextMenu.CustomControls
             };
             deleteButton.Clicked += AdvancedSettingPage.RemoveSavedKey;
 
-            return new Grid()
-                .SetSize(new float[] { Grid.Remain, 24f, 24f }, new float[] { 1f })
-                .Set(infoLabel, switchButton, deleteButton);
+            return new Border 
+            {
+                Background = Widgets.LightHighlight,
+                Content = new Grid()
+                    .SetSize(new float[] { Grid.Remain, 24f, 24f }, new float[] { 1f })
+                    .Set(infoLabel, switchButton, deleteButton)
+            };
         }
-
-        protected override void DrawCore()
-        {
-            GUI.DrawTexture(RenderRect, Widgets.LightHighlight);
-            base.DrawCore();
-        }
-
-        #endregion
     }
 }

@@ -2,7 +2,9 @@
 using Nebulae.RimWorld.UI;
 using Nebulae.RimWorld.UI.Controls;
 using Nebulae.RimWorld.UI.Utilities;
+using Nebulae.RimWorld.UI.Windows;
 using NoCrowdedContextMenu.SettingPages;
+using NoCrowdedContextMenu.Windows;
 using RimWorld;
 using Verse;
 
@@ -38,6 +40,11 @@ namespace NoCrowdedContextMenu
         }
 
 
+        protected override ModSettingWindow CreateSettingWindow()
+        {
+            return new CustomSettingWindow(this);
+        }
+
         protected override Control CreateContent()
         {
             return new TabControl().Set(
@@ -66,6 +73,25 @@ namespace NoCrowdedContextMenu
                 ItemPickerWindow.PickerWindow = new ItemPickerWindow();
                 MaterialInfoWindow.InfoWindow.Unbind();
                 MaterialInfoWindow.InfoWindow = new MaterialInfoWindow();
+            }
+        }
+
+
+        private sealed class CustomSettingWindow : ModSettingWindow
+        {
+            public CustomSettingWindow(Mod associatedMod) : base(associatedMod)
+            {
+            }
+
+
+            public override void PostOpen()
+            {
+                base.PostOpen();
+
+                if (ItemPickerWindow.PickerWindow.IsOpen)
+                {
+                    ItemPickerWindow.PickerWindow.Close();
+                }
             }
         }
     }

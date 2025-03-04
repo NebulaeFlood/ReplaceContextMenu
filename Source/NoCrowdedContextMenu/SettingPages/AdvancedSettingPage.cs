@@ -19,11 +19,6 @@ namespace NoCrowdedContextMenu.SettingPages
         private static VirtualizingStackPanel _protectedRecordPanel;
         private static VirtualizingStackPanel _replaceRecordPanel;
 
-        private static Rect _protectedRecordPanelRect;
-        private static Rect _replaceRecordPanelRect;
-
-        private static Color _borderColor = Color.gray;
-
 
         private AdvancedSettingPage()
         {
@@ -49,23 +44,6 @@ namespace NoCrowdedContextMenu.SettingPages
             NCCM.Settings.Write();
         }
 
-        //------------------------------------------------------
-        //
-        //  Protected Methods
-        //
-        //------------------------------------------------------
-
-        #region Protected Methods
-
-        protected override Rect ArrangeCore(Rect availableRect)
-        {
-            availableRect = base.ArrangeCore(availableRect);
-
-            _protectedRecordPanelRect = _protectedRecordPanel.GetParent().DesiredRect;
-            _replaceRecordPanelRect = _replaceRecordPanel.GetParent().DesiredRect;
-
-            return availableRect;
-        }
 
         protected override Control CreateContent()
         {
@@ -76,6 +54,8 @@ namespace NoCrowdedContextMenu.SettingPages
             _replaceRecordPanel = new VirtualizingStackPanel()
                 .Set(NCCM.Settings.ReplacedMenuKeys
                     .Select(key => new ReplaceRecordEntry(key, false)).ToArray());
+
+            var background = Widgets.WindowBGFillColor.ToBrush();
 
             return new StackPanel
             {
@@ -95,11 +75,17 @@ namespace NoCrowdedContextMenu.SettingPages
                                 Tooltip = "NCCM.AdvancedSettings.Category.BlackList.Tooltip".Translate(),
                                 ShowTooltip = true
                             },
-                            new ScrollViewer
+                            new Border
                             {
-                                Content = _protectedRecordPanel,
-                                Margin = 4f,
-                                HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden
+                                Background = background,
+                                BorderBrush = BrushUtility.Grey,
+                                BorderThickness = 1,
+                                Content = new ScrollViewer
+                                {
+                                    Content = _protectedRecordPanel,
+                                    Margin = 4f,
+                                    HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden
+                                }
                             }
                         ),
                     new Grid { Margin = 4f }
@@ -113,24 +99,21 @@ namespace NoCrowdedContextMenu.SettingPages
                                 Tooltip = "NCCM.AdvancedSettings.Category.WhiteList.Tooltip".Translate(),
                                 ShowTooltip = true
                             },
-                            new ScrollViewer
+                            new Border
                             {
-                                Content = _replaceRecordPanel,
-                                Margin = 4f,
-                                HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden
+                                Background = background,
+                                BorderBrush = BrushUtility.Grey,
+                                BorderThickness = 1,
+                                Content = new ScrollViewer
+                                {
+                                    Content = _replaceRecordPanel,
+                                    Margin = 4f,
+                                    HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden
+                                }
                             }
                         )
                 );
         }
-
-        protected override void DrawCore()
-        {
-            UIUtility.DrawRectangle(_protectedRecordPanelRect, Widgets.WindowBGFillColor, _borderColor);
-            UIUtility.DrawRectangle(_replaceRecordPanelRect, Widgets.WindowBGFillColor, _borderColor);
-            base.DrawCore();
-        }
-
-        #endregion
 
 
         //------------------------------------------------------
@@ -143,7 +126,7 @@ namespace NoCrowdedContextMenu.SettingPages
 
         internal static void RemoveSavedKey(ButtonBase button, EventArgs e)
         {
-            if (button.GetParent()?.GetParent() is ReplaceRecordEntry entry)
+            if (button.GetParent(2) is ReplaceRecordEntry entry)
             {
                 if (entry.IsProtectedKey)
                 {
@@ -162,7 +145,7 @@ namespace NoCrowdedContextMenu.SettingPages
 
         internal static void SwitchSavedKey(ButtonBase button, EventArgs e)
         {
-            if (button.GetParent()?.GetParent() is ReplaceRecordEntry entry)
+            if (button.GetParent(2) is ReplaceRecordEntry entry)
             {
                 if (entry.IsProtectedKey)
                 {

@@ -1,6 +1,7 @@
 ﻿using Nebulae.RimWorld.UI.Controls;
 using Nebulae.RimWorld.UI.Utilities;
 using Nebulae.RimWorld.Utilities;
+using NoCrowdedContextMenu.Windows;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -28,6 +29,14 @@ namespace NoCrowdedContextMenu.CustomControls
         #endregion
 
 
+        //------------------------------------------------------
+        //
+        //  Private Fields
+        //
+        //------------------------------------------------------
+
+        #region Private Fields
+
         private readonly OptionInfo _optionInfo;
         private readonly FloatMenu _originalMenu;
         private readonly FloatMenuOption _option;
@@ -37,6 +46,8 @@ namespace NoCrowdedContextMenu.CustomControls
         private Rect _iconRectCache;
         private Rect _infoButtonRectCache;
         private Rect _labelRectCache;
+
+        #endregion
 
 
         static CustomMenuItem()
@@ -130,48 +141,43 @@ namespace NoCrowdedContextMenu.CustomControls
             return renderRect;
         }
 
-
-        protected override void DrawButton(Rect renderRect, bool isEnabled, bool isCursorOver, bool isPressing)
+        protected override void DrawButton(ButtonStatus status)
         {
-            Color currentColor = GUI.color;
+            Color color = GUI.color;
+            bool isEnabled = !status.HasFlag(ButtonStatus.Disabled);
+
             GUI.color = isEnabled
-                ? currentColor
-                : currentColor * Widgets.InactiveColor;
+                ? color
+                : color * Widgets.InactiveColor;
 
             Texture2D background = Button.DefaultNormalBackground;
 
-            if (isCursorOver)
+            if (status.HasFlag(ButtonStatus.Hovered))
             {
-                Vector2 mousePos = Input.mousePosition / Prefs.UIScale;
-                mousePos.y = UI.screenHeight - mousePos.y;
-
-                if (ReferenceEquals(Find.WindowStack.GetWindowAt(mousePos), _owner))
+                if (isEnabled)
                 {
-                    if (isEnabled)
-                    {
-                        background = isPressing
-                            ? Button.DefaultPressedBackground
-                            : Button.DefaultMouseOverBackground;
-                    }
-
-                    if (_optionInfo.ShowMaterialInfoWindow
-                        && !ItemPickerWindow.AnyItemHovered)
-                    {
-                        ItemPickerWindow.AnyItemHovered = true;
-                        MaterialInfoWindow.Initialize(_optionInfo,
-                            new Rect(
-                                _owner.windowRect.x - 220f,
-                                _owner.windowRect.y,
-                                220f,
-                                320f));
-                    }
-
-                    _option.mouseoverGuiAction?.Invoke(new Rect(
-                        mousePos.x - _owner.windowRect.x,
-                        mousePos.y - _owner.windowRect.y + InfoTooltipYOffset,
-                        InfoTooltipXOffset,
-                        0f));
+                    background = status is ButtonStatus.Pressed
+                        ? Button.DefaultPressedBackground
+                        : Button.DefaultMouseOverBackground;
                 }
+
+                if (_optionInfo.ShowMaterialInfoWindow
+                    && !ItemPickerWindow.AnyItemHovered)
+                {
+                    ItemPickerWindow.AnyItemHovered = true;
+                    MaterialInfoWindow.Initialize(_optionInfo,
+                        new Rect(
+                            _owner.windowRect.x - 220f,
+                            _owner.windowRect.y,
+                            220f,
+                            320f));
+                }
+
+                _option.mouseoverGuiAction?.Invoke(new Rect(
+                    MouseUtility.CursorPosition.x - _owner.windowRect.x,
+                    MouseUtility.CursorPosition.y - _owner.windowRect.y + InfoTooltipYOffset,
+                    InfoTooltipXOffset,
+                    0f));
             }
 
             Widgets.DrawAtlas(_hitTestRectCache, background);
@@ -194,7 +200,7 @@ namespace NoCrowdedContextMenu.CustomControls
                 GameText.Anchor = anchor;
             }
 
-            GUI.color = currentColor;
+            GUI.color = color;
 
             if (_optionInfo.HasInfoCard)
             {
@@ -205,6 +211,19 @@ namespace NoCrowdedContextMenu.CustomControls
             {
                 UIHighlighter.HighlightOpportunity(_labelRectCache, _option.tutorTag);
             }
+        }
+
+        protected override void DrawInnerControlRect()
+        {
+            if (_optionInfo.HasInfoCard)
+            {
+                UIUtility.DrawBorder(_infoButtonRectCache, UIUtility.ControlRectBorderBrush);
+            }
+        }
+
+        protected override Rect HitTestCore(Rect contentRect)
+        {
+            return _hitTestRectCache.IntersectWith(contentRect);
         }
 
         protected override void OnClick()
@@ -221,15 +240,6 @@ namespace NoCrowdedContextMenu.CustomControls
             MaterialInfoWindow.Hide();
             _originalMenu.PreOptionChosen(_option);
             _option.action.Invoke();
-        }
-
-        protected override Rect SegmentCore(Rect visiableRect)
-        {
-            visiableRect = _hitTestRectCache.IntersectWith(visiableRect);
-
-            UpdateHitTestRect(visiableRect);
-
-            return visiableRect;
         }
     }
 }

@@ -13,7 +13,7 @@ using Verse;
 using Grid = Nebulae.RimWorld.UI.Controls.Panels.Grid;
 using TextBlock = Nebulae.RimWorld.UI.Controls.TextBlock;
 
-namespace NoCrowdedContextMenu
+namespace NoCrowdedContextMenu.Windows
 {
     internal sealed class MaterialInfoWindow : ControlWindow
     {

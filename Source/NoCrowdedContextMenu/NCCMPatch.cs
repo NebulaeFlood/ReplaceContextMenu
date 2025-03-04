@@ -4,7 +4,7 @@ using NoCrowdedContextMenu.SettingPages;
 using RimWorld;
 using System.Collections.Generic;
 using Verse;
-using static NoCrowdedContextMenu.ItemPickerWindow;
+using static NoCrowdedContextMenu.Windows.ItemPickerWindow;
 
 namespace NoCrowdedContextMenu
 {

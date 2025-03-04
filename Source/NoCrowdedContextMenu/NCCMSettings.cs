@@ -1,21 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using Nebulae.RimWorld.UI.Automation;
+using System.Collections.Generic;
 using Verse;
 
 namespace NoCrowdedContextMenu
 {
+    [StandardTranslationKey("NCCM.Settings")]
     public class NCCMSettings : ModSettings
     {
+        [BooleanSettingEntry]
         public bool AskBeforeReplace = true;
+        [BooleanSettingEntry]
         public bool ReplaceUnknownSource = true;
 
+        [BooleanSettingEntry]
         public bool CloseOnClickOutSide = false;
+        [BooleanSettingEntry]
         public bool FocusSearchBar = false;
+        [BooleanSettingEntry]
         public bool HasMemory = false;
+        [BooleanSettingEntry]
         public bool IsDragable = true;
+        [BooleanSettingEntry]
         public bool IsResizable = true;
+        [BooleanSettingEntry]
         public bool PauseGame = false;
+        [BooleanSettingEntry]
         public bool UseVanillaRenderMode = false;
 
+        [NumberSettingEntry(1f, 200f)]
         public int MinimumOptionCountCauseReplacement = 10;
 
         public HashSet<FloatMenuKey> ProtectedMenuKeys = new HashSet<FloatMenuKey>();

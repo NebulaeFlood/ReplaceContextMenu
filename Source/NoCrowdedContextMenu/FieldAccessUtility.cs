@@ -1,11 +1,12 @@
 ﻿using HarmonyLib;
 using Nebulae.RimWorld.UI.Data;
 using System;
+using Nebulae.RimWorld.UI.Data.Utilities;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
 using Verse;
-using static Nebulae.RimWorld.UI.Data.FieldUtility;
+
 
 namespace NoCrowdedContextMenu
 {
@@ -21,12 +22,12 @@ namespace NoCrowdedContextMenu
 
         static FieldAccessUtility()
         {
-            OptionsGetter = CreateFieldAccesser<FloatMenu, List<FloatMenuOption>>("options");
-            IconThingGetter = CreateFieldAccesser<FloatMenuOption, Thing>("iconThing");
-            ItemIconGetter = CreateFieldAccesser<FloatMenuOption, Texture2D>("itemIcon");
-            DrawPlaceHolderIconGetter = CreateFieldAccesser<FloatMenuOption, bool>("drawPlaceHolderIcon");
-            ShownItemGetter = CreateFieldAccesser<FloatMenuOption, ThingDef>("shownItem");
-            ThingStyleGetter = CreateFieldAccesser<FloatMenuOption, ThingStyleDef>("thingStyle");
+            OptionsGetter = FieldUtility.CreateFieldAccesser<FloatMenu, List<FloatMenuOption>>("options");
+            IconThingGetter = FieldUtility.CreateFieldAccesser<FloatMenuOption, Thing>("iconThing");
+            ItemIconGetter = FieldUtility.CreateFieldAccesser<FloatMenuOption, Texture2D>("itemIcon");
+            DrawPlaceHolderIconGetter = FieldUtility.CreateFieldAccesser<FloatMenuOption, bool>("drawPlaceHolderIcon");
+            ShownItemGetter = FieldUtility.CreateFieldAccesser<FloatMenuOption, ThingDef>("shownItem");
+            ThingStyleGetter = FieldUtility.CreateFieldAccesser<FloatMenuOption, ThingStyleDef>("thingStyle");
         }
     }
 }
