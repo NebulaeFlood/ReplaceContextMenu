@@ -1,11 +1,11 @@
 # Replace Context Menu
 
-Ìæ»»Ô­°æÓÒ¼ü²Ëµ¥¡£
+æ›¿æ¢åŸç‰ˆå³é”®èœå•ã€‚
 
 Replaced vanilla context menu.
 
-ÏîÄ¿ÎÄ¼şÖĞµÄ dll ÎÄ¼şÎª Debug ÎÄ¼ş£¬Î´Ê¹ÓÃ±àÒëÓÅ»¯¡£
+é¡¹ç›®æ–‡ä»¶ä¸­çš„ dll æ–‡ä»¶ä¸º Debug æ–‡ä»¶ï¼Œå¯èƒ½ä¸å¯ç”¨ã€‚
 
-The DLL files in the project files are Debug files and have not used compilation optimization.
+The DLL files in the project files are Debug files and may be unusable.
 
 [__Steam__](https://steamcommunity.com/sharedfiles/filedetails/?id=3403563363)
