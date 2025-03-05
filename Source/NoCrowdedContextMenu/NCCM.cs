@@ -51,8 +51,7 @@ namespace NoCrowdedContextMenu
                 new TabItem
                 {
                     Content = SettingPage.Instance,
-                    Text = "NCCM.Settings.NormalSettings.Tab.Label".Translate(),
-                    ShowTooltip = true
+                    Text = "NCCM.Settings.NormalSettings.Tab.Label".Translate()
                 },
                 new TabItem
                 {
