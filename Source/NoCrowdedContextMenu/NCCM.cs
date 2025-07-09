@@ -39,6 +39,11 @@ namespace NoCrowdedContextMenu
         public NCCM(ModContentPack content) : base(content) { }
 
 
+        public override string SettingsCategory()
+        {
+            return "NCCM.SettingsCategory.Label".Translate();
+        }
+
         protected override Control CreateContent()
         {
             return new TabControl().Set(
