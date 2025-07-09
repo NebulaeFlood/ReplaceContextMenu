@@ -3,10 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-0Harmony.dll
-NebulaeFlood.RimWorld.dll
-NebulaeFlood.RimWorld.UI.dll
-NebulaeFlood.RimWorld.UI.Data.dll
+*.dll
+!NoCrowdedContextMenu.dll
 
 # User-specific files
 *.rsuser
