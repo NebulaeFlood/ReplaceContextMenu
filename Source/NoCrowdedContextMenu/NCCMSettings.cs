@@ -1,11 +1,14 @@
-﻿using Nebulae.RimWorld.UI.Automation;
+﻿using Nebulae.RimWorld.UI;
+using Nebulae.RimWorld.UI.Automation;
+using Nebulae.RimWorld.UI.Automation.Attributes;
+using NoCrowdedContextMenu.Models;
 using System.Collections.Generic;
 using Verse;
 
 namespace NoCrowdedContextMenu
 {
-    [StandardTranslationKey("NCCM.Settings")]
-    public class NCCMSettings : ModSettings
+    [Settings("NCCM.Settings")]
+    public class NCCMSettings : NebulaeModSettings<NCCMSettings>
     {
         [BooleanSettingEntry]
         public bool AskBeforeReplace = true;
@@ -24,19 +27,23 @@ namespace NoCrowdedContextMenu
         public bool IsResizable = true;
         [BooleanSettingEntry]
         public bool PauseGame = false;
-        [BooleanSettingEntry]
-        public bool UseVanillaRenderMode = false;
 
-        [NumberSettingEntry(1f, 200f)]
+        [NumberSettingEntry(2f, 50f)]
         public int MinimumOptionCountCauseReplacement = 10;
 
-        public HashSet<FloatMenuKey> ProtectedMenuKeys = new HashSet<FloatMenuKey>();
-        public HashSet<FloatMenuKey> ReplacedMenuKeys = new HashSet<FloatMenuKey>();
+        [NumberSettingEntry(200f, 600f)]
+        public float OptionWidth = 300f;
+
+        [NumberSettingEntry(140f, 300f)]
+        public float OptionDescriptionMaxHeight = 160f;
+
+        public HashSet<MenuSourceModel> ProtectedMenuSources;
+        public HashSet<MenuSourceModel> ReplacedMenuSources;
 
         public override void ExposeData()
         {
-            Scribe_Values.Look(ref AskBeforeReplace, nameof(FocusSearchBar), true);
-            Scribe_Values.Look(ref ReplaceUnknownSource, nameof(FocusSearchBar), true);
+            Scribe_Values.Look(ref AskBeforeReplace, nameof(AskBeforeReplace), true);
+            Scribe_Values.Look(ref ReplaceUnknownSource, nameof(ReplaceUnknownSource), true);
 
             Scribe_Values.Look(ref CloseOnClickOutSide, nameof(CloseOnClickOutSide), false);
             Scribe_Values.Look(ref FocusSearchBar, nameof(FocusSearchBar), false);
@@ -44,24 +51,23 @@ namespace NoCrowdedContextMenu
             Scribe_Values.Look(ref IsDragable, nameof(IsDragable), true);
             Scribe_Values.Look(ref IsResizable, nameof(IsResizable), true);
             Scribe_Values.Look(ref PauseGame, nameof(PauseGame), false);
-            Scribe_Values.Look(ref UseVanillaRenderMode, nameof(UseVanillaRenderMode), false);
 
             Scribe_Values.Look(ref MinimumOptionCountCauseReplacement, nameof(MinimumOptionCountCauseReplacement), 10);
 
-            Scribe_Collections.Look(ref ProtectedMenuKeys, nameof(ProtectedMenuKeys), LookMode.Deep);
-            Scribe_Collections.Look(ref ReplacedMenuKeys, nameof(ReplacedMenuKeys), LookMode.Deep);
+            Scribe_Collections.Look(ref ProtectedMenuSources, nameof(ProtectedMenuSources), LookMode.Deep);
+            Scribe_Collections.Look(ref ReplacedMenuSources, nameof(ReplacedMenuSources), LookMode.Deep);
+        }
 
-            if (Scribe.mode is LoadSaveMode.PostLoadInit)
+        public override void OnCheckIntegrity()
+        {
+            if (ProtectedMenuSources is null)
             {
-                if (ProtectedMenuKeys is null)
-                {
-                    ProtectedMenuKeys = new HashSet<FloatMenuKey>();
-                }
+                ProtectedMenuSources = new HashSet<MenuSourceModel>();
+            }
 
-                if (ReplacedMenuKeys is null)
-                {
-                    ReplacedMenuKeys = new HashSet<FloatMenuKey>();
-                }
+            if (ReplacedMenuSources is null)
+            {
+                ReplacedMenuSources = new HashSet<MenuSourceModel>();
             }
         }
     }

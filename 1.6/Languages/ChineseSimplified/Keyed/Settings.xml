@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<!-- EN: Replace Context Menu -->
+	<NCCM.SettingsCategory.Label>替换右键菜单</NCCM.SettingsCategory.Label>
+
+	<!-- # Tab Items -->
+
+	<!-- EN: Basic -->
+	<NCCM.Settings.Basic.Tab.Label>基础</NCCM.Settings.Basic.Tab.Label>
+
+	<!-- EN: Advanced -->
+	<NCCM.Settings.Advanced.Tab.Label>高级</NCCM.Settings.Advanced.Tab.Label>
+	<!-- EN: More settings of menu replacement. -->
+	<NCCM.Settings.Advanced.Tab.Tooltip>有关菜单替换的详细设置。</NCCM.Settings.Advanced.Tab.Tooltip>
+
+	<!-- # Settings -->
+
+	<!-- EN: Ask before replace -->
+	<NCCM.Settings.AskBeforeReplace.Label>替换前询问</NCCM.Settings.AskBeforeReplace.Label>
+	<!-- EN: After enabling this option, you will be asked whether to replace the menu when replacing the menu. -->
+	<NCCM.Settings.AskBeforeReplace.Tooltip>开启此项后，替换菜单时将询问是否替换菜单。</NCCM.Settings.AskBeforeReplace.Tooltip>
+
+	<!-- EN: Replace unknown source -->
+	<NCCM.Settings.ReplaceUnknownSource.Label>替换未知来源</NCCM.Settings.ReplaceUnknownSource.Label>
+	<!-- EN: After enabling this option, menus whose sources cannot be determined will be directly replaced. -->
+	<NCCM.Settings.ReplaceUnknownSource.Tooltip>开启此项后，无法判断来源的菜单将直接被替换。</NCCM.Settings.ReplaceUnknownSource.Tooltip>
+
+	<!-- EN: Close menu on click outside -->
+	<NCCM.Settings.CloseOnClickOutSide.Label>点击菜单外部时关闭菜单</NCCM.Settings.CloseOnClickOutSide.Label>
+	<!-- EN: After enabling this option, clicking outside the menu will close it. -->
+	<NCCM.Settings.CloseOnClickOutSide.Tooltip>开启此项后，点击菜单以外的空间将关闭菜单。</NCCM.Settings.CloseOnClickOutSide.Tooltip>
+
+	<!-- EN: Auto focus search bar -->
+	<NCCM.Settings.FocusSearchBar.Label>搜索栏自动获得焦点</NCCM.Settings.FocusSearchBar.Label>
+	<!-- EN: After enabling this option, the focus will be automatically set to the search bar when the menu is opened. -->
+	<NCCM.Settings.FocusSearchBar.Tooltip>开启此项后，打开菜单将自动把焦点设置在搜索栏。</NCCM.Settings.FocusSearchBar.Tooltip>
+
+	<!-- EN: Menu has memory -->
+	<NCCM.Settings.HasMemory.Label>菜单是否拥有记忆</NCCM.Settings.HasMemory.Label>
+	<!-- EN: After enabling this option, the menu will remember its position and size when the window is closed. -->
+	<NCCM.Settings.HasMemory.Tooltip>开启此项后，菜单将记住窗口关闭时的位置和大小。</NCCM.Settings.HasMemory.Tooltip>
+
+	<!-- EN: Menu is draggable -->
+	<NCCM.Settings.IsDragable.Label>菜单是否可拖动</NCCM.Settings.IsDragable.Label>
+	<!-- EN: After enabling this option, the menu can be dragged. -->
+	<NCCM.Settings.IsDragable.Tooltip>开启此项将能够拖动菜单。</NCCM.Settings.IsDragable.Tooltip>
+
+	<!-- EN: Menu is resizable -->
+	<NCCM.Settings.IsResizable.Label>是否可调整菜单大小</NCCM.Settings.IsResizable.Label>
+	<!-- EN: After enabling this option, a corner will be displayed at the bottom right of the menu for resizing. -->
+	<NCCM.Settings.IsResizable.Tooltip>开启此项后，菜单右下角将显示一个角标用于调整菜单大小。</NCCM.Settings.IsResizable.Tooltip>
+
+	<!-- EN: Menu pause game -->
+	<NCCM.Settings.PauseGame.Label>是否暂停游戏</NCCM.Settings.PauseGame.Label>
+	<!-- EN: After enabling this option, the game will be paused when the menu is opened. -->
+	<NCCM.Settings.PauseGame.Tooltip>开启此项后，打开菜单将暂停游戏。</NCCM.Settings.PauseGame.Tooltip>
+
+	<!-- EN: Number to trigger the replacement: -->
+	<NCCM.Settings.MinimumOptionCountCauseReplacement.Label>触发替换的最少选项数：</NCCM.Settings.MinimumOptionCountCauseReplacement.Label>
+	<!-- EN: When the number of options in the menu is greater than this number, we will replace the vanilla menu. -->
+	<NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>当菜单中选项多于此数时，\n替换原版菜单。</NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>
+
+	<!-- EN: Number to trigger the replacement: -->
+	<NCCM.Settings.OptionWidth.Label>菜单选项宽度：</NCCM.Settings.OptionWidth.Label>
+	<!-- EN: When the number of options in the menu is greater than this number, we will replace the vanilla menu. -->
+	<NCCM.Settings.OptionWidth.Tooltip>替换的菜单中选项的宽度。</NCCM.Settings.OptionWidth.Tooltip>
+
+	<!-- EN: Number to trigger the replacement: -->
+	<NCCM.Settings.OptionDescriptionMaxHeight.Label>菜单信息描述最大高度：</NCCM.Settings.OptionDescriptionMaxHeight.Label>
+	<!-- EN: When the number of options in the menu is greater than this number, we will replace the vanilla menu. -->
+	<NCCM.Settings.OptionDescriptionMaxHeight.Tooltip>菜单信息窗口中，材料描述部分的最大高度。</NCCM.Settings.OptionDescriptionMaxHeight.Tooltip>
+
+
+	<!-- # Advanced Setting Page -->
+
+	<!-- EN: Protected menu sources: -->
+	<NCCM.Advanced.BlackList.Label>受保护的菜单源：</NCCM.Advanced.BlackList.Label>
+	<!-- EN: Menus created by the following sources will not be replaced. -->
+	<NCCM.Advanced.BlackList.Tooltip>由下方列表中的源创建的菜单将不会被替换。</NCCM.Advanced.BlackList.Tooltip>
+
+	<!-- EN: Replaced menu sources: -->
+	<NCCM.Advanced.WhiteList.Label>将替换的菜单源：</NCCM.Advanced.WhiteList.Label>
+	<!-- EN: Menus created by the following sources will be replaced. -->
+	<NCCM.Advanced.WhiteList.Tooltip>由下方列表中的源创建的菜单将会被替换。</NCCM.Advanced.WhiteList.Tooltip>
+
+</LanguageData>

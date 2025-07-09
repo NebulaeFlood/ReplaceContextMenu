@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<!-- EN: A replaceable menu has been found.\n\nWould you like to replace it?\n\n&#xE03C;color&#xE03D;gray&#xE03E;From：Replace Context Menu&#xE03C;&#xE02F;color&#xE03E; -->
+	<NCCN.ConfirmReplace.Text>发现一个可替换的菜单，\n\n是否替换?</NCCN.ConfirmReplace.Text>
+
+	<!-- EN: Yes -->
+	<NCCN.ConfirmReplace.Accept.Label>替换</NCCN.ConfirmReplace.Accept.Label>
+
+	<!-- EN: No -->
+	<NCCN.ConfirmReplace.Reject.Label>保留</NCCN.ConfirmReplace.Reject.Label>
+
+</LanguageData>

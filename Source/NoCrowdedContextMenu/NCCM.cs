@@ -1,9 +1,12 @@
 ﻿using HarmonyLib;
 using Nebulae.RimWorld.UI;
+using Nebulae.RimWorld.UI.Automation;
 using Nebulae.RimWorld.UI.Controls;
+using Nebulae.RimWorld.UI.Controls.Basic;
 using Nebulae.RimWorld.UI.Utilities;
 using Nebulae.RimWorld.UI.Windows;
-using NoCrowdedContextMenu.SettingPages;
+using NoCrowdedContextMenu.Coordinators;
+using NoCrowdedContextMenu.Patches;
 using NoCrowdedContextMenu.Windows;
 using RimWorld;
 using Verse;
@@ -17,81 +20,39 @@ namespace NoCrowdedContextMenu
         internal static readonly Harmony HarmonyInstance;
 
 
-        public override string CategoryLabel => "NCCM.SettingsCategory.Label".Translate();
-
 
         static NCCM()
         {
             HarmonyInstance = new Harmony(UniqueId);
-
+            UIUtility.DebugMode = true;
             HarmonyInstance.Patch(
                 AccessTools.Method(typeof(Designator_Build), nameof(Designator_Build.ProcessInput)),
-                prefix: new HarmonyMethod(typeof(NCCMPatch), nameof(NCCMPatch.Designator_Build_ProcessInputPrefix)));
+                prefix: new HarmonyMethod(typeof(Designator_Build_Patch), nameof(Designator_Build_Patch.ProcessInputPrefix)));
             HarmonyInstance.Patch(
                 AccessTools.Method(typeof(Designator_Dropdown), nameof(Designator_Dropdown.ProcessInput)),
-                prefix: new HarmonyMethod(typeof(NCCMPatch), nameof(NCCMPatch.Designator_Dropdown_ProcessInputPrefix)));
+                prefix: new HarmonyMethod(typeof(Designator_Dropdown_Patch), nameof(Designator_Dropdown_Patch.ProcessInputPrefix)));
             HarmonyInstance.Patch(
                 AccessTools.Method(typeof(WindowStack), nameof(WindowStack.Add)),
-                prefix: new HarmonyMethod(typeof(NCCMPatch), nameof(NCCMPatch.WindowStack_AddPrefix)));
+                prefix: new HarmonyMethod(typeof(WindowStack_Patch), nameof(WindowStack_Patch.AddPrefix)));
         }
 
-        public NCCM(ModContentPack content) : base(content)
-        {
-        }
+        public NCCM(ModContentPack content) : base(content) { }
 
-
-        protected override ModSettingWindow CreateSettingWindow()
-        {
-            return new CustomSettingWindow(this);
-        }
 
         protected override Control CreateContent()
         {
             return new TabControl().Set(
                 new TabItem
                 {
-                    Content = SettingPage.Instance,
-                    Text = "NCCM.Settings.NormalSettings.Tab.Label".Translate()
+                    Content = Settings.GenerateLayout(),
+                    Header = "NCCM.Settings.Basic.Tab.Label".Translate()
                 },
                 new TabItem
                 {
-                    Content = AdvancedSettingPage.Instance,
-                    Text = "NCCM.Settings.AdvancedSettings.Tab.Label".Translate(),
-                    Tooltip = "NCCM.Settings.AdvancedSettings.Tab.Tooltip".Translate(),
-                    ShowTooltip = true
+                    Content = MenuManagerCoordinator.View,
+                    Header = "NCCM.Settings.Advanced.Tab.Label".Translate(),
+                    Tooltip = "NCCM.Settings.Advanced.Tab.Tooltip".Translate()
                 });
-        }
-
-        public override void HandleUIEvent(UIEventType type)
-        {
-            base.HandleUIEvent(type);
-
-            if (type is UIEventType.LanguageChanged)
-            {
-                ItemPickerWindow.PickerWindow.Unbind();
-                ItemPickerWindow.PickerWindow = new ItemPickerWindow();
-                MaterialInfoWindow.InfoWindow.Unbind();
-                MaterialInfoWindow.InfoWindow = new MaterialInfoWindow();
-            }
-        }
-
-
-        private sealed class CustomSettingWindow : ModSettingWindow
-        {
-            public CustomSettingWindow(Mod associatedMod) : base(associatedMod)
-            {
-            }
-
-
-            public override void PostOpen()
-            {
-                base.PostOpen();
-
-                if (ItemPickerWindow.PickerWindow.IsOpen)
-                {
-                    ItemPickerWindow.PickerWindow.Close();
-                }
-            }
         }
     }
 }

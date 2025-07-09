@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<!-- EN: The full name of the method for creating a menu.  -->
+	<NCCM.MenuSource.Label.Tooltip>创建菜单的方法全称。</NCCM.MenuSource.Label.Tooltip>
+
+	<!-- EN: Reverse this menu source. -->
+	<NCCM.MenuSource.Switch.Tooltip>反转该菜单源。</NCCM.MenuSource.Switch.Tooltip>
+
+	<!-- EN: Remove this menu source. -->
+	<NCCM.MenuSource.Delete.Tooltip>移除该菜单源。</NCCM.MenuSource.Delete.Tooltip>
+
+</LanguageData>

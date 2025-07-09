@@ -1,19 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Verse;
 
-namespace NoCrowdedContextMenu
+namespace NoCrowdedContextMenu.Models
 {
-    public struct FloatMenuKey : IEquatable<FloatMenuKey>, IExposable
+    public struct MenuSourceModel : IEquatable<MenuSourceModel>, IExposable
     {
-        private string _declaringTypeName;
-        private string _methodName;
-        private string _namespace;
-
-        private int _hashCode;
-
-
-        public FloatMenuKey(Type declaringType, string methodName)
+        public MenuSourceModel(Type declaringType, string methodName)
         {
             _declaringTypeName = declaringType.Name;
             _methodName = methodName;
@@ -23,13 +20,13 @@ namespace NoCrowdedContextMenu
         }
 
 
-        public static bool TryCreateKey(out FloatMenuKey key)
+        public static bool TryCreate(out MenuSourceModel key)
         {
-            if (new StackTrace().GetFrame(3) is StackFrame frame)
+            if (new StackTrace().GetFrame(4) is StackFrame frame)
             {
                 var method = frame.GetMethod();
 
-                key = new FloatMenuKey(method.DeclaringType, method.Name);
+                key = new MenuSourceModel(method.DeclaringType, method.Name);
                 return true;
             }
             else
@@ -39,6 +36,15 @@ namespace NoCrowdedContextMenu
             }
         }
 
+
+        //------------------------------------------------------
+        //
+        //  Public Methods
+        //
+        //------------------------------------------------------
+
+        #region Public Methods
+
         public override int GetHashCode()
         {
             return _hashCode;
@@ -46,13 +52,13 @@ namespace NoCrowdedContextMenu
 
         public override bool Equals(object obj)
         {
-            return obj is FloatMenuKey other
+            return obj is MenuSourceModel other
                 && _declaringTypeName == other._declaringTypeName
                 && _methodName == other._methodName
                 && _namespace == other._namespace;
         }
 
-        public bool Equals(FloatMenuKey other)
+        public bool Equals(MenuSourceModel other)
         {
             return _declaringTypeName == other._declaringTypeName
                 && _methodName == other._methodName
@@ -63,7 +69,7 @@ namespace NoCrowdedContextMenu
         {
             Scribe_Values.Look(ref _declaringTypeName, "DeclaringType");
             Scribe_Values.Look(ref _methodName, "Method");
-            Scribe_Values.Look(ref _namespace, "_namespace");
+            Scribe_Values.Look(ref _namespace, "Namespace");
             Scribe_Values.Look(ref _hashCode, "HashCode");
         }
 
@@ -73,10 +79,27 @@ namespace NoCrowdedContextMenu
             {
                 return $"{_declaringTypeName}.{_methodName}";
             }
-            else
-            {
-                return $"{_namespace}.{_declaringTypeName}.{_methodName}";
-            }
+
+            return $"{_namespace}.{_declaringTypeName}.{_methodName}";
         }
+
+        #endregion
+
+
+        //------------------------------------------------------
+        //
+        //  Private Fields
+        //
+        //------------------------------------------------------
+
+        #region Private Fields
+
+        private string _declaringTypeName;
+        private string _methodName;
+        private string _namespace;
+
+        private int _hashCode;
+
+        #endregion
     }
 }

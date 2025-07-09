@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\1.5\Assemblies\</OutputPath>
+    <OutputPath>..\..\1.6\Assemblies\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -32,42 +32,45 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FloatMenuType.cs" />
-    <Compile Include="Windows\MaterialInfoWindow.cs" />
-    <Compile Include="NCCMPatch.cs" />
-    <Compile Include="NCCMSettings.cs" />
-    <Compile Include="OptionInfo.cs" />
-    <Compile Include="SettingPages\AdvancedSettingPage.cs" />
-    <Compile Include="FloatMenuKey.cs" />
-    <Compile Include="Windows\ItemPickerWindow.cs" />
-    <Compile Include="CustomControls\CustomMenuItem.cs" />
-    <Compile Include="FieldAccessUtility.cs" />
+    <Compile Include="Coordinators\ItemPickerCoordinator.cs" />
+    <Compile Include="Coordinators\MenuManagerCoordinator.cs" />
+    <Compile Include="Models\BuildingMenuOptionModel.cs" />
+    <Compile Include="Models\MenuOptionModel.cs" />
+    <Compile Include="Models\MenuSourceModel.cs" />
     <Compile Include="NCCM.cs" />
+    <Compile Include="NCCMSettings.cs" />
+    <Compile Include="Patches\Designator_Build_Patch.cs" />
+    <Compile Include="Patches\Designator_Dropdown_Patch.cs" />
+    <Compile Include="Patches\WindowStack_Patch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CustomControls\ReplaceRecordEntry.cs" />
-    <Compile Include="CustomControls\VanillaMenuItem.cs" />
-    <Compile Include="SettingPages\SettingPage.cs" />
+    <Compile Include="Utilities\MenuOptionUtility.cs" />
+    <Compile Include="Utilities\ResourceUtility.cs" />
+    <Compile Include="Views\BuildingMenuOptionInfoView.cs" />
+    <Compile Include="Views\ItemPickerView.cs" />
+    <Compile Include="Views\MenuManagerView.cs" />
+    <Compile Include="Views\MenuOptionView.cs" />
+    <Compile Include="Views\MenuSourceView.cs" />
+    <Compile Include="Windows\ItemPickerWIndow.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Rimworld.Ref">
-      <Version>1.5.4297</Version>
+      <Version>1.6.4511-beta</Version>
     </PackageReference>
     <PackageReference Include="Lib.Harmony">
-      <Version>2.3.5</Version>
+      <Version>2.3.6</Version>
     </PackageReference>
     <PackageReference Include="Nebulae.RimWorld">
-      <Version>1.1.4</Version>
+      <Version>1.3.0-1.0.8</Version>
     </PackageReference>
     <PackageReference Include="Nebulae.RimWorld.UI">
-      <Version>1.5.4</Version>
+      <Version>1.6.0-alpha-1.1.31</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<NCCM.SettingsCategory.Label>Replace Context Menu</NCCM.SettingsCategory.Label>
+
+	<!-- # Tab Items -->
+
+	<NCCM.Settings.NormalSettings.Tab.Label>Normal</NCCM.Settings.NormalSettings.Tab.Label>
+
+	<NCCM.Settings.AdvancedSettings.Tab.Label>Advanced</NCCM.Settings.AdvancedSettings.Tab.Label>
+	<NCCM.Settings.AdvancedSettings.Tab.Tooltip>More settings of menu replacement.</NCCM.Settings.AdvancedSettings.Tab.Tooltip>
+
+
+	<!-- # Setting Entries -->
+
+	<NCCM.Settings.AskBeforeReplace.Label>Ask before replace</NCCM.Settings.AskBeforeReplace.Label>
+	<NCCM.Settings.AskBeforeReplace.Tooltip>After enabling this option, you will be asked whether to replace the menu when replacing the menu.</NCCM.Settings.AskBeforeReplace.Tooltip>
+
+	<NCCM.Settings.ReplaceUnknownSource.Label>Replace unknown source</NCCM.Settings.ReplaceUnknownSource.Label>
+	<NCCM.Settings.ReplaceUnknownSource.Tooltip>After enabling this option, menus whose sources cannot be determined will be directly replaced.</NCCM.Settings.ReplaceUnknownSource.Tooltip>
+
+	<NCCM.Settings.CloseOnClickOutSide.Label>Close menu on click outside</NCCM.Settings.CloseOnClickOutSide.Label>
+	<NCCM.Settings.CloseOnClickOutSide.Tooltip>After enabling this option, clicking outside the menu will close it.</NCCM.Settings.CloseOnClickOutSide.Tooltip>
+
+	<NCCM.Settings.FocusSearchBar.Label>Auto focus search bar</NCCM.Settings.FocusSearchBar.Label>
+	<NCCM.Settings.FocusSearchBar.Tooltip>After enabling this option, the focus will be automatically set to the search bar when the menu is opened.</NCCM.Settings.FocusSearchBar.Tooltip>
+
+	<NCCM.Settings.HasMemory.Label>Menu has memory</NCCM.Settings.HasMemory.Label>
+	<NCCM.Settings.HasMemory.Tooltip>After enabling this option, the menu will remember its position and size when the window is closed.</NCCM.Settings.HasMemory.Tooltip>
+
+	<NCCM.Settings.IsDragable.Label>Menu is draggable</NCCM.Settings.IsDragable.Label>
+	<NCCM.Settings.IsDragable.Tooltip>After enabling this option, the menu can be dragged.</NCCM.Settings.IsDragable.Tooltip>
+
+	<NCCM.Settings.IsResizable.Label>Menu is resizable</NCCM.Settings.IsResizable.Label>
+	<NCCM.Settings.IsResizable.Tooltip>After enabling this option, a corner will be displayed at the bottom right of the menu for resizing.</NCCM.Settings.IsResizable.Tooltip>
+
+	<NCCM.Settings.MinimumOptionCountCauseReplacement.Label>Number to trigger the replacement:</NCCM.Settings.MinimumOptionCountCauseReplacement.Label>
+	<NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>When the number of options in the menu is greater than this number, we will replace the vanilla menu.</NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>
+
+	<NCCM.Settings.PauseGame.Label>Menu pause game</NCCM.Settings.PauseGame.Label>
+	<NCCM.Settings.PauseGame.Tooltip>After enabling this option, the game will be paused when the menu is opened.</NCCM.Settings.PauseGame.Tooltip>
+
+	<NCCM.Settings.UseVanillaRenderMode.Label>Whether to use vanilla render mode</NCCM.Settings.UseVanillaRenderMode.Label>
+	<NCCM.Settings.UseVanillaRenderMode.Tooltip>Enable this option to improve compatibility when encountering errors caused by this mod.</NCCM.Settings.UseVanillaRenderMode.Tooltip>
+
+
+	<!-- # Message Box -->
+
+	<NCCN.ConfirmReplaceFloatMenu.Text>A replaceable menu has been found.\n\nWould you like to replace it?</NCCN.ConfirmReplaceFloatMenu.Text>
+
+	<NCCN.ConfirmReplaceFloatMenu.AcceptButton.Label>Yes</NCCN.ConfirmReplaceFloatMenu.AcceptButton.Label>
+	<NCCN.ConfirmReplaceFloatMenu.RejectButton.Label>No</NCCN.ConfirmReplaceFloatMenu.RejectButton.Label>
+
+
+	<!-- # Advanced Setting Page -->
+
+	<NCCM.AdvancedSettings.Category.BlackList.Label>Protected menu sources:</NCCM.AdvancedSettings.Category.BlackList.Label>
+	<NCCM.AdvancedSettings.Category.BlackList.Tooltip>Menus created by the following methods will not be replaced.</NCCM.AdvancedSettings.Category.BlackList.Tooltip>
+
+	<NCCM.AdvancedSettings.Category.WhiteList.Label>Replaced menu sources:</NCCM.AdvancedSettings.Category.WhiteList.Label>
+	<NCCM.AdvancedSettings.Category.WhiteList.Tooltip>Menus created by the following methods will be replaced.</NCCM.AdvancedSettings.Category.WhiteList.Tooltip>
+
+	<NCCM.ReplaceSettings.Entry.Tooltip>The full name of the method for creating a menu.</NCCM.ReplaceSettings.Entry.Tooltip>
+
+	<NCCM.AdvancedSettings.Entry.SwitchButton.Tooltip>Reverse this menu source.</NCCM.AdvancedSettings.Entry.SwitchButton.Tooltip>
+
+	<NCCM.AdvancedSettings.Entry.DeleteButton.Tooltip>Remove this menu source.</NCCM.AdvancedSettings.Entry.DeleteButton.Tooltip>
+
+</LanguageData>
