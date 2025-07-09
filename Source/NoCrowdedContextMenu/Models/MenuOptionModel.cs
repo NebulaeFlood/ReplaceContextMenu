@@ -2,10 +2,6 @@
 using NoCrowdedContextMenu.Utilities;
 using RimWorld;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 
@@ -76,7 +72,7 @@ namespace NoCrowdedContextMenu.Models
             }
 
             _iconComposition = WhiteColor;
-            StyleDef = null;  
+            StyleDef = null;
 
             if (ThingDef != null)
             {

@@ -1,13 +1,10 @@
 ﻿using HarmonyLib;
 using Nebulae.RimWorld.UI;
 using Nebulae.RimWorld.UI.Automation;
-using Nebulae.RimWorld.UI.Controls;
 using Nebulae.RimWorld.UI.Controls.Basic;
 using Nebulae.RimWorld.UI.Utilities;
-using Nebulae.RimWorld.UI.Windows;
 using NoCrowdedContextMenu.Coordinators;
 using NoCrowdedContextMenu.Patches;
-using NoCrowdedContextMenu.Windows;
 using RimWorld;
 using Verse;
 
@@ -43,6 +40,7 @@ namespace NoCrowdedContextMenu
         {
             return "NCCM.SettingsCategory.Label".Translate();
         }
+
 
         protected override Control CreateContent()
         {

@@ -8,11 +8,6 @@ using NoCrowdedContextMenu.Models;
 using NoCrowdedContextMenu.Utilities;
 using NoCrowdedContextMenu.Windows;
 using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
@@ -191,7 +186,7 @@ namespace NoCrowdedContextMenu.Views
                 window.InfoView.Clear();
             }
 
-            e.Handled= true;
+            e.Handled = true;
         }
 
         protected override void OnStatesChanged(ControlState states)
