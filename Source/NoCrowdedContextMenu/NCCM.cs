@@ -21,7 +21,7 @@ namespace NoCrowdedContextMenu
         static NCCM()
         {
             HarmonyInstance = new Harmony(UniqueId);
-            UIUtility.DebugMode = true;
+
             HarmonyInstance.Patch(
                 AccessTools.Method(typeof(Designator_Build), nameof(Designator_Build.ProcessInput)),
                 prefix: new HarmonyMethod(typeof(Designator_Build_Patch), nameof(Designator_Build_Patch.ProcessInputPrefix)));
