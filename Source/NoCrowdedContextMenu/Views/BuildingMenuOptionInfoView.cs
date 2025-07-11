@@ -50,11 +50,11 @@ namespace NoCrowdedContextMenu.Views
             int cost = option.Model.Building.Cost;
             int count = option.Model.Building.ResourceCount;
 
-            _costLabel.Text = "NCCM.InfoWindow.CostResource.CostCount".Translate(cost);
+            _costLabel.Text = "NCCM.BuildingMenuOptionInfoView.CostCount".Translate(cost);
 
             if (count > -1)
             {
-                _countLabel.Text = "NCCM.InfoWindow.CostResource.CurrentCount".Translate(count).Colorize(cost > count ? ColorLibrary.RedReadable : ColorLibrary.Green);
+                _countLabel.Text = "NCCM.BuildingMenuOptionInfoView.CurrentCount".Translate(count).Colorize(cost > count ? ColorLibrary.RedReadable : ColorLibrary.Green);
                 _countLabel.Visibility = Visibility.Visible;
             }
             else
@@ -81,7 +81,7 @@ namespace NoCrowdedContextMenu.Views
             {
                 Anchor = TextAnchor.UpperLeft,
                 FontSize = GameFont.Medium,
-                Text = "NCCM.InfoWindow.CostResource.Title".Translate().Colorize(ColorLibrary.Yellow)
+                Text = "BuildingMenuOptionInfoView.Title".Translate().Colorize(ColorLibrary.Yellow)
             };
 
             var resourceInfo = new Grid()

@@ -31,7 +31,7 @@ namespace NoCrowdedContextMenu
         public int MinimumOptionCountCauseReplacement = 10;
 
         [NumberSettingEntry(200f, 600f)]
-        public float OptionWidth = 300f;
+        public float OptionWidth = 330f;
 
         [NumberSettingEntry(140f, 300f)]
         public float OptionDescriptionMaxHeight = 160f;
@@ -52,6 +52,8 @@ namespace NoCrowdedContextMenu
             Scribe_Values.Look(ref PauseGame, nameof(PauseGame), false);
 
             Scribe_Values.Look(ref MinimumOptionCountCauseReplacement, nameof(MinimumOptionCountCauseReplacement), 10);
+            Scribe_Values.Look(ref OptionWidth, nameof(OptionWidth), 330f);
+            Scribe_Values.Look(ref OptionDescriptionMaxHeight, nameof(OptionDescriptionMaxHeight), 160f);
 
             Scribe_Collections.Look(ref ProtectedMenuSources, nameof(ProtectedMenuSources), LookMode.Deep);
             Scribe_Collections.Look(ref ReplacedMenuSources, nameof(ReplacedMenuSources), LookMode.Deep);

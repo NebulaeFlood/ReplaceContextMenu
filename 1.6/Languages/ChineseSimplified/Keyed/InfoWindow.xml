@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<!-- EN: Material -->
+	<NCCM.BuildingMenuOptionInfoView.Title>原料</NCCM.BuildingMenuOptionInfoView.Title>
+
+	<!-- EN: Cost: {0} -->
+	<NCCM.BuildingMenuOptionInfoView.CostCount>消耗：{0}</NCCM.BuildingMenuOptionInfoView.CostCount>
+
+	<!-- EN: Have: {0} -->
+	<NCCM.BuildingMenuOptionInfoView.CurrentCount>已有：{0}</NCCM.BuildingMenuOptionInfoView.CurrentCount>
+
+</LanguageData>

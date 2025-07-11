@@ -53,6 +53,11 @@ namespace NoCrowdedContextMenu.Views
         {
             _optionPanel.Set(ProcessOptions(menu, options));
             _optionPanel.ItemWidth = NCCM.Settings.OptionWidth;
+
+            if (NCCM.Settings.FocusSearchBar)
+            {
+                _searchBox.Focus();
+            }
         }
 
         #endregion

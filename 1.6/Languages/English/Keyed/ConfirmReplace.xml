@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<NCCN.ConfirmReplace.Text>A replaceable menu has been found.\n\nWould you like to replace it?</NCCN.ConfirmReplace.Text>
+
+	<NCCN.ConfirmReplace.Accept.Label>Yes</NCCN.ConfirmReplace.Accept.Label>
+	<NCCN.ConfirmReplace.Reject.Label>No</NCCN.ConfirmReplace.Reject.Label>
+
+</LanguageData>

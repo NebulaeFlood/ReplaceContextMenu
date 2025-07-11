@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<LanguageData>
-
-	<NCCM.InfoWindow.CostResource.Title>Material</NCCM.InfoWindow.CostResource.Title>
-	<NCCM.InfoWindow.CostResource.CostCount>Cost: {0}</NCCM.InfoWindow.CostResource.CostCount>
-	<NCCM.InfoWindow.CostResource.CurrentCount>Have: {0}</NCCM.InfoWindow.CostResource.CurrentCount>
-
-</LanguageData>

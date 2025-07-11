@@ -19,7 +19,7 @@ namespace NoCrowdedContextMenu.Views
         static MenuSourceView()
         {
             MarginProperty.OverrideMetadata(typeof(MenuSourceView),
-                new ControlPropertyMetadata(new Thickness(4f), ControlRelation.Measure));
+                new ControlPropertyMetadata(new Thickness(4f, 4f, 4f, 0f), ControlRelation.Measure));
         }
 
         internal MenuSourceView(MenuSourceModel model)

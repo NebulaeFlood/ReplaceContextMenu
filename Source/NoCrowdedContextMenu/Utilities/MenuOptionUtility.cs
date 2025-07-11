@@ -68,6 +68,12 @@ namespace NoCrowdedContextMenu.Utilities
                 return menu;
             }
 
+            if (ReferenceEquals(_protectedMenu, menu))
+            {
+                _protectedMenu = menu;
+                return menu;
+            }
+
             if (!settings.AskBeforeReplace)
             {
                 return ItemPickerCoordinator.Bind(menu, options);
@@ -99,6 +105,8 @@ namespace NoCrowdedContextMenu.Utilities
 
             void RejectReplacement()
             {
+                _protectedMenu = menu;
+
                 settings.ProtectedMenuSources.Add(model);
                 settings.Mod.WriteSettings();
                 windowStack.Add(menu);
@@ -145,6 +153,8 @@ namespace NoCrowdedContextMenu.Utilities
 
         private static bool _isMaterialPicker;
         private static BuildableDef _building;
+
+        private static FloatMenu _protectedMenu;
 
         #endregion
     }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<NCCM.BuildingMenuOptionInfoView.Title>Material</NCCM.BuildingMenuOptionInfoView.Title>
+
+	<NCCM.BuildingMenuOptionInfoView.CostCount>Cost: {0}</NCCM.BuildingMenuOptionInfoView.CostCount>
+	<NCCM.BuildingMenuOptionInfoView.CurrentCount>Have: {0}</NCCM.BuildingMenuOptionInfoView.CurrentCount>
+
+</LanguageData>

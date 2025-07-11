@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<NCCM.MenuSource.Label.Tooltip>The full name of the method for creating a menu.</NCCM.MenuSource.Label.Tooltip>
+
+	<NCCM.MenuSource.Switch.Tooltip>Reverse this menu source.</NCCM.MenuSource.Switch.Tooltip>
+	<NCCM.MenuSource.Delete.Tooltip>Remove this menu source.</NCCM.MenuSource.Delete.Tooltip>
+
+</LanguageData>

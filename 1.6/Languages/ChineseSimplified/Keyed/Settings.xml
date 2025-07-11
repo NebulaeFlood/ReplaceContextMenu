@@ -56,19 +56,19 @@
 	<!-- EN: After enabling this option, the game will be paused when the menu is opened. -->
 	<NCCM.Settings.PauseGame.Tooltip>开启此项后，打开菜单将暂停游戏。</NCCM.Settings.PauseGame.Tooltip>
 
-	<!-- EN: Number to trigger the replacement: -->
+	<!-- EN: Number triggers replacements: -->
 	<NCCM.Settings.MinimumOptionCountCauseReplacement.Label>触发替换的最少选项数：</NCCM.Settings.MinimumOptionCountCauseReplacement.Label>
 	<!-- EN: When the number of options in the menu is greater than this number, we will replace the vanilla menu. -->
 	<NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>当菜单中选项多于此数时，\n替换原版菜单。</NCCM.Settings.MinimumOptionCountCauseReplacement.Tooltip>
 
-	<!-- EN: Number to trigger the replacement: -->
+	<!-- EN: Menu option width: -->
 	<NCCM.Settings.OptionWidth.Label>菜单选项宽度：</NCCM.Settings.OptionWidth.Label>
-	<!-- EN: When the number of options in the menu is greater than this number, we will replace the vanilla menu. -->
+	<!-- EN: Set the width of each menu option in replaced menus. -->
 	<NCCM.Settings.OptionWidth.Tooltip>替换的菜单中选项的宽度。</NCCM.Settings.OptionWidth.Tooltip>
 
-	<!-- EN: Number to trigger the replacement: -->
+	<!-- EN: Description max height: -->
 	<NCCM.Settings.OptionDescriptionMaxHeight.Label>菜单信息描述最大高度：</NCCM.Settings.OptionDescriptionMaxHeight.Label>
-	<!-- EN: When the number of options in the menu is greater than this number, we will replace the vanilla menu. -->
+	<!-- EN: Set the max height of description in the info window of replaced menus. -->
 	<NCCM.Settings.OptionDescriptionMaxHeight.Tooltip>菜单信息窗口中，材料描述部分的最大高度。</NCCM.Settings.OptionDescriptionMaxHeight.Tooltip>
 
 
