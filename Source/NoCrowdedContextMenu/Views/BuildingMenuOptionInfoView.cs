@@ -81,7 +81,7 @@ namespace NoCrowdedContextMenu.Views
             {
                 Anchor = TextAnchor.UpperLeft,
                 FontSize = GameFont.Medium,
-                Text = "BuildingMenuOptionInfoView.Title".Translate().Colorize(ColorLibrary.Yellow)
+                Text = "NCCM.BuildingMenuOptionInfoView.Title".Translate().Colorize(ColorLibrary.Yellow)
             };
 
             var resourceInfo = new Grid()
