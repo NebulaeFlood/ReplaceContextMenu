@@ -2,7 +2,6 @@
 using Nebulae.RimWorld.UI;
 using Nebulae.RimWorld.UI.Automation;
 using Nebulae.RimWorld.UI.Controls.Basic;
-using Nebulae.RimWorld.UI.Utilities;
 using NoCrowdedContextMenu.Coordinators;
 using NoCrowdedContextMenu.Patches;
 using RimWorld;
