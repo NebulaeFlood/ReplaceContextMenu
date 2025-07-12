@@ -45,7 +45,7 @@ namespace NoCrowdedContextMenu.Views
             }
 
             _icon.Model = option.Model;
-            _resourceName.Text = option.Name;
+            _resourceName.Text = option.Model.Building.Material.LabelCap;
 
             int cost = option.Model.Building.Cost;
             int count = option.Model.Building.ResourceCount;
