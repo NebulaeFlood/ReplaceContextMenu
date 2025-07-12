@@ -106,7 +106,9 @@ namespace NoCrowdedContextMenu.Views
 
         private IEnumerable<MenuOptionView> ProcessOptions(FloatMenu menu, List<FloatMenuOption> options)
         {
-            for (int i = options.Count - 1; i >= 0; i--)
+            int count = options.Count;
+
+            for (int i = 0; i < count; i++)
             {
                 var option = options[i];
                 option.SetSizeMode(FloatMenuSizeMode.Normal);
