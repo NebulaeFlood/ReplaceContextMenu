@@ -10,7 +10,6 @@ namespace NoCrowdedContextMenu.Patches
             if (window is FloatMenu floatMenu)
             {
                 window = MenuOptionUtility.ReplaceFloatMenu(__instance, floatMenu);
-                MenuOptionUtility.OnMenuReplaced();
             }
         }
     }

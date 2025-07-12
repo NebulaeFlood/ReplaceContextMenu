@@ -1,4 +1,5 @@
-﻿using NoCrowdedContextMenu.Views;
+﻿using NoCrowdedContextMenu.Utilities;
+using NoCrowdedContextMenu.Views;
 using NoCrowdedContextMenu.Windows;
 using System.Collections.Generic;
 using Verse;
@@ -18,6 +19,8 @@ namespace NoCrowdedContextMenu.Coordinators
             Window.draggable = settings.IsDragable;
             Window.resizeable = settings.IsResizable;
             Window.forcePause = settings.PauseGame;
+
+            MenuOptionUtility.OnMenuProcessed();
 
             return Window;
         }

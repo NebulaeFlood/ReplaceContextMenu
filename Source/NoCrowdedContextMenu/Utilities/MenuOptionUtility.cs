@@ -49,7 +49,7 @@ namespace NoCrowdedContextMenu.Utilities
             _isMaterialPicker = true;
         }
 
-        internal static void OnMenuReplaced()
+        internal static void OnMenuProcessed()
         {
             _isBuildingPicker = false;
             _buildings = null;
@@ -65,12 +65,14 @@ namespace NoCrowdedContextMenu.Utilities
 
             if (options.Count < settings.MinimumOptionCountCauseReplacement)
             {
+                OnMenuProcessed();
                 return menu;
             }
 
             if (ReferenceEquals(_protectedMenu, menu))
             {
-                _protectedMenu = menu;
+                OnMenuProcessed();
+                _protectedMenu = null;
                 return menu;
             }
 
@@ -81,11 +83,20 @@ namespace NoCrowdedContextMenu.Utilities
 
             if (!MenuSourceModel.TryCreate(out var model))
             {
-                return settings.ReplaceUnknownSource ? ItemPickerCoordinator.Bind(menu, options) : menu;
+                if (settings.ReplaceUnknownSource)
+                {
+                    return ItemPickerCoordinator.Bind(menu, options);
+                }
+                else
+                {
+                    OnMenuProcessed();
+                    return menu;
+                }
             }
 
             if (settings.ProtectedMenuSources.Contains(model))
             {
+                OnMenuProcessed();
                 return menu;
             }
 
