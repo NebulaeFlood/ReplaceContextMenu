@@ -133,21 +133,6 @@ namespace NoCrowdedContextMenu.Utilities
                 RejectReplacement);
         }
 
-        internal static void ResolveDesignator(Designator_Build designator)
-        {
-            if (designator.PlacingDef is BuildableDef def && def.MadeFromStuff)
-            {
-                _isMaterialPicker = true;
-                _building = def;
-            }
-        }
-
-        internal static void ResolveDesignator(Designator_Dropdown designator)
-        {
-            _isBuildingPicker = true;
-            _buildings = designator.Elements.FindAll(x => x.Visible);
-        }
-
 
         //------------------------------------------------------
         //
