@@ -6,34 +6,34 @@ using Verse;
 
 namespace NoCrowdedContextMenu
 {
-    [Settings("NCCM.Settings")]
+    [LayoutModel("NCCM.Settings")]
     public class NCCMSettings : NebulaeModSettings<NCCMSettings>
     {
-        [BooleanSettingEntry]
+        [BooleanEntry]
         public bool AskBeforeReplace = true;
-        [BooleanSettingEntry]
+        [BooleanEntry]
         public bool ReplaceUnknownSource = true;
 
-        [BooleanSettingEntry]
+        [BooleanEntry]
         public bool CloseOnClickOutSide = false;
-        [BooleanSettingEntry]
+        [BooleanEntry]
         public bool FocusSearchBar = false;
-        [BooleanSettingEntry]
+        [BooleanEntry]
         public bool HasMemory = false;
-        [BooleanSettingEntry]
+        [BooleanEntry]
         public bool IsDragable = true;
-        [BooleanSettingEntry]
+        [BooleanEntry]
         public bool IsResizable = true;
-        [BooleanSettingEntry]
+        [BooleanEntry]
         public bool PauseGame = false;
 
-        [NumberSettingEntry(2f, 50f)]
+        [NumberEntry(2f, 50f)]
         public int MinimumOptionCountCauseReplacement = 10;
 
-        [NumberSettingEntry(200f, 600f)]
+        [NumberEntry(200f, 600f)]
         public float OptionWidth = 330f;
 
-        [NumberSettingEntry(140f, 300f)]
+        [NumberEntry(140f, 300f)]
         public float OptionDescriptionMaxHeight = 160f;
 
         public HashSet<MenuSourceModel> ProtectedMenuSources;
