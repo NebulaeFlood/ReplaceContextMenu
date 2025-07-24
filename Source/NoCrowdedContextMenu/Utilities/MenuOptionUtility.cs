@@ -105,32 +105,47 @@ namespace NoCrowdedContextMenu.Utilities
                 return ItemPickerCoordinator.Bind(menu, options);
             }
 
-            void AcceptReplacement()
+            if (_askMessageBox is null)
             {
-                settings.ReplacedMenuSources.Add(model);
-                settings.Mod.WriteSettings();
-                windowStack.Add(ItemPickerCoordinator.Bind(menu, options));
+                void AcceptReplacement()
+                {
+                    if (settings.ReplacedMenuSources.Add(model))
+                    {
+                        settings.Mod.WriteSettings();
+                        MenuManagerCoordinator.View.ReplacedSourcePanel.Append(new MenuSourceView(model));
+                    }
 
-                MenuManagerCoordinator.View.ReplacedSourcePanel.Append(new MenuSourceView(model));
+                    _askMessageBox = null;
+
+                    windowStack.Add(ItemPickerCoordinator.Bind(menu, options));
+                }
+
+                void RejectReplacement()
+                {
+                    _protectedMenu = menu;
+
+                    if (settings.ProtectedMenuSources.Add(model))
+                    {
+                        settings.Mod.WriteSettings();
+                        MenuManagerCoordinator.View.ProtectedSourcePanel.Append(new MenuSourceView(model));
+                    }
+
+                    _askMessageBox = null;
+
+                    windowStack.Add(menu);
+                }
+
+                _askMessageBox = new Dialog_MessageBox(
+                    "NCCN.ConfirmReplace.Text".Translate(),
+                    "NCCN.ConfirmReplace.Accept.Label".Translate(),
+                    AcceptReplacement,
+                    "NCCN.ConfirmReplace.Reject.Label".Translate(),
+                    RejectReplacement);
+
+                return _askMessageBox;
             }
 
-            void RejectReplacement()
-            {
-                _protectedMenu = menu;
-
-                settings.ProtectedMenuSources.Add(model);
-                settings.Mod.WriteSettings();
-                windowStack.Add(menu);
-
-                MenuManagerCoordinator.View.ProtectedSourcePanel.Append(new MenuSourceView(model));
-            }
-
-            return new Dialog_MessageBox(
-                "NCCN.ConfirmReplace.Text".Translate(),
-                "NCCN.ConfirmReplace.Accept.Label".Translate(),
-                AcceptReplacement,
-                "NCCN.ConfirmReplace.Reject.Label".Translate(),
-                RejectReplacement);
+            return null;
         }
 
 
@@ -150,6 +165,7 @@ namespace NoCrowdedContextMenu.Utilities
         private static bool _isMaterialPicker;
         private static BuildableDef _building;
 
+        private static Dialog_MessageBox _askMessageBox;
         private static FloatMenu _protectedMenu;
 
         #endregion

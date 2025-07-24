@@ -4,6 +4,7 @@ using Nebulae.RimWorld.UI.Controls.Resources;
 using Nebulae.RimWorld.UI.Core.Data;
 using Nebulae.RimWorld.UI.Core.Events;
 using Nebulae.RimWorld.UI.Utilities;
+using Nebulae.RimWorld.Utilities;
 using NoCrowdedContextMenu.Models;
 using NoCrowdedContextMenu.Utilities;
 using NoCrowdedContextMenu.Windows;
@@ -28,12 +29,15 @@ namespace NoCrowdedContextMenu.Views
                 new PropertyMetadata(HorizontalAlignment.Stretch));
             VerticalAlignmentProperty.OverrideMetadata(typeof(MenuOptionView),
                 new PropertyMetadata(VerticalAlignment.Stretch));
+
+            ClickSoundProperty.OverrideMetadata(typeof(MenuOptionView),
+                new PropertyMetadata(SoundDefOf.ColonistOrdered));
+            CursorEnterSoundProperty.OverrideMetadata(typeof(MenuOptionView),
+                new PropertyMetadata(SoundDefOf.Mouseover_Standard));
         }
 
         internal MenuOptionView(FloatMenu sourceMenu, FloatMenuOption option, int index)
         {
-            ClickSound = SoundDefOf.ColonistOrdered;
-            CursorEnterSound = SoundDefOf.Mouseover_Standard;
             Name = option.Label;
 
             if (option.action is null)
