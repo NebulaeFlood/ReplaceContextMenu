@@ -76,11 +76,6 @@ namespace NoCrowdedContextMenu.Utilities
                 return menu;
             }
 
-            if (!settings.AskBeforeReplace)
-            {
-                return ItemPickerCoordinator.Bind(menu, options);
-            }
-
             if (!MenuSourceModel.TryCreate(out var model))
             {
                 if (settings.ReplaceUnknownSource)
@@ -100,7 +95,7 @@ namespace NoCrowdedContextMenu.Utilities
                 return menu;
             }
 
-            if (settings.ReplacedMenuSources.Contains(model))
+            if (!settings.AskBeforeReplace || settings.ReplacedMenuSources.Contains(model))
             {
                 return ItemPickerCoordinator.Bind(menu, options);
             }
