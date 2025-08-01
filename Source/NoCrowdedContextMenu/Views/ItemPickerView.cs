@@ -74,8 +74,8 @@ namespace NoCrowdedContextMenu.Views
 
             var border = new Border
             {
-                Background = BrushUtility.DarkGrey,
-                BorderBrush = BrushUtility.Grey,
+                Background = BrushUtility.DarkerGrey,
+                BorderBrush = BrushUtility.LightGrey,
                 BorderThickness = 1f,
                 Content = scrollViewer,
                 Margin = new Thickness(0f, 16f, 0f, 0f),
