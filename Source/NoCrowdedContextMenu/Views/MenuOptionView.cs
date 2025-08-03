@@ -9,6 +9,7 @@ using NoCrowdedContextMenu.Models;
 using NoCrowdedContextMenu.Utilities;
 using NoCrowdedContextMenu.Windows;
 using RimWorld;
+using System;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
@@ -166,8 +167,17 @@ namespace NoCrowdedContextMenu.Views
 
             LayoutManager.Owner.Close();
 
-            _sourceMenu.PreOptionChosen(_sourceOption);
-            _sourceOption.action();
+            var action = _sourceOption.action;
+
+            try
+            {
+                _sourceMenu.PreOptionChosen(_sourceOption);
+                action.Invoke();
+            }
+            catch (Exception ex)
+            {
+                NCCM.DebugLabel.Error($"Faild to invoke a float menu option's action from '{action.Method.DeclaringType}'.\n---> {ex}");
+            }
 
             ClickSound.PlayOneShotOnCamera();
             e.Handled = true;
