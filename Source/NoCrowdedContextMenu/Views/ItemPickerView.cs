@@ -13,12 +13,6 @@ namespace NoCrowdedContextMenu.Views
     {
         internal ItemPickerView()
         {
-            _optionPanel = new WrapPanel
-            {
-                ItemWidth = 300f,
-                ItemHeight = 48f
-            };
-
             _searchBox = new SearchBox
             {
                 Margin = 4f,
@@ -28,8 +22,12 @@ namespace NoCrowdedContextMenu.Views
                 MinWidth = 340f
             };
 
-            _optionPanel.Filter = FilterControl;
-            _searchBox.Search += OnSearch;
+            _optionPanel = new WrapPanel
+            {
+                ItemWidth = 300f,
+                ItemHeight = 48f
+            };
+            _optionPanel.Bind(_searchBox);
 
             Initialize();
         }
@@ -68,6 +66,7 @@ namespace NoCrowdedContextMenu.Views
             var scrollViewer = new ScrollViewer
             {
                 Content = _optionPanel,
+                Margin = 4f,
                 HorizontalScroll = true,
                 VerticalScrollBarVisibility = ScrollBarVisibility.Hidden
             };
@@ -84,25 +83,10 @@ namespace NoCrowdedContextMenu.Views
 
             return new Grid()
                 .DefineRows(36f, Grid.Remain)
-                .Set(
-                    _searchBox,
-                    border
+                .Set(_searchBox, border
                 );
         }
 
-
-        //------------------------------------------------------
-        //
-        //  Private Methods
-        //
-        //------------------------------------------------------
-
-        #region Private Methods
-
-        private bool FilterControl(Control control)
-        {
-            return _searchBox.Matches(control.Name);
-        }
 
         private IEnumerable<MenuOptionView> ProcessOptions(FloatMenu menu, List<FloatMenuOption> options)
         {
@@ -115,13 +99,6 @@ namespace NoCrowdedContextMenu.Views
                 yield return new MenuOptionView(menu, option, i);
             }
         }
-
-        private void OnSearch(SearchBox sender, EventArgs args)
-        {
-            _optionPanel.InvalidateFilter();
-        }
-
-        #endregion
 
 
         //------------------------------------------------------

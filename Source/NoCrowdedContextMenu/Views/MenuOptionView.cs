@@ -23,9 +23,6 @@ namespace NoCrowdedContextMenu.Views
 
         static MenuOptionView()
         {
-            MarginProperty.OverrideMetadata(typeof(MenuOptionView),
-                new ControlPropertyMetadata(new Thickness(0f, 0f, 4f, 4f), ControlRelation.Measure));
-
             HorizontalAlignmentProperty.OverrideMetadata(typeof(MenuOptionView),
                 new PropertyMetadata(HorizontalAlignment.Stretch));
             VerticalAlignmentProperty.OverrideMetadata(typeof(MenuOptionView),
@@ -48,7 +45,7 @@ namespace NoCrowdedContextMenu.Views
 
             if (option.tooltip.HasValue)
             {
-                Tooltip = option.tooltip.Value;
+                SetTooltip(option.tooltip.Value);
             }
 
             Model = new MenuOptionModel(option, index);
