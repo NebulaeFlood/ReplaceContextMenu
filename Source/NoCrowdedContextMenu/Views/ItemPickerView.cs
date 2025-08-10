@@ -66,7 +66,6 @@ namespace NoCrowdedContextMenu.Views
             var scrollViewer = new ScrollViewer
             {
                 Content = _optionPanel,
-                Margin = 4f,
                 HorizontalScroll = true,
                 VerticalScrollBarVisibility = ScrollBarVisibility.Hidden
             };
@@ -77,8 +76,8 @@ namespace NoCrowdedContextMenu.Views
                 BorderBrush = BrushUtility.LightGrey,
                 BorderThickness = 1f,
                 Content = scrollViewer,
-                Margin = new Thickness(0f, 16f, 0f, 0f),
-                Padding = new Thickness(4f, 4f, 0f, 0f)
+                Margin = (0f, 16f, 0f, 0f),
+                Padding = 4f
             };
 
             return new Grid()
